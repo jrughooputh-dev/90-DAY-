@@ -148,13 +148,25 @@ select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/
     <div class="metric"><div class="mn" id="m-h2o">0</div><div class="ml">glasses H2O</div></div>
     <div class="metric"><div class="mn" id="m-kcal">0</div><div class="ml">kcal</div></div>
   </div>
-  <div class="card">
-    <div class="lbl">Adaptive schedule</div>
-    <div class="fr">
-      <input type="time" id="wake-in" value="10:30" style="flex:1">
-      <button class="btn btn-sm btn-p" onclick="applyWake()">Set wake time</button>
+  <div id="start-banner" style="display:none">
+    <div class="card-dark" style="margin-bottom:10px">
+      <div style="font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:8px;letter-spacing:-0.3px">Set your start date</div>
+      <p style="font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:14px;line-height:1.6">The countdown and day tracker begin from this date. Set it to today to start now, or a future date to schedule your start.</p>
+      <div class="fr">
+        <input type="date" id="start-date-input" style="flex:1;background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);color:white;">
+        <button class="btn btn-sm" style="background:white;color:var(--t);border-color:white;flex-shrink:0" onclick="setStartDate()">Start 90 days</button>
+      </div>
     </div>
-    <div id="sched-list"></div>
+  </div>
+  <div id="schedule-wrap" style="display:none">
+    <div class="card">
+      <div class="lbl">Adaptive schedule</div>
+      <div class="fr">
+        <input type="time" id="wake-in" value="10:30" style="flex:1">
+        <button class="btn btn-sm btn-p" onclick="applyWake()">Set wake time</button>
+      </div>
+      <div id="sched-list"></div>
+    </div>
   </div>
   <div class="card">
     <div class="lbl">Quick log</div>
@@ -409,11 +421,11 @@ const WK={1:{A:{name:'Lower Body',ex:[{n:'Bodyweight Squat',s:'3x15',u:'https://
 
 let S={startDate:null,wakeTime:'10:30',wP:1,wD:'A',chk:{},today:{smokes:[],water:0,meals:[],log:[],wakeTime:null,sleepTime:null,sleepHrs:null,sleepQuality:null},lastDate:null,nut:{p:0,c:0,f:0},meas:[],streak:0};
 
-function load(){const r=localStorage.getItem('j90v4');if(r)try{S={...S,...JSON.parse(r)};}catch(e){}if(!S.startDate){S.startDate=new Date().toISOString().split('T')[0];save();}const td=ds();if(S.lastDate!==td){S.today={smokes:[],water:0,meals:[],log:[],wakeTime:null,sleepTime:null,sleepHrs:null,sleepQuality:null};S.nut={p:0,c:0,f:0};S.lastDate=td;save();}}
+function load(){const r=localStorage.getItem('j90v4');if(r)try{S={...S,...JSON.parse(r)};}catch(e){}// startDate set manually by userconst td=ds();if(S.lastDate!==td){S.today={smokes:[],water:0,meals:[],log:[],wakeTime:null,sleepTime:null,sleepHrs:null,sleepQuality:null};S.nut={p:0,c:0,f:0};S.lastDate=td;save();}}
 function save(){localStorage.setItem('j90v4',JSON.stringify(S));}
 function ds(){return new Date().toISOString().split('T')[0];}
-function dayNum(){return Math.min(Math.max(Math.floor((new Date()-new Date(S.startDate))/86400000)+1,1),90);}
-function ph(d){return d<=30?1:d<=60?2:3;}
+function dayNum(){if(!S.startDate)return 0;return Math.min(Math.max(Math.floor((new Date()-new Date(S.startDate))/86400000)+1,1),90);}
+function ph(d){if(!d||d===0)return 1;return d<=30?1:d<=60?2:3;}
 function ft(t){if(!t)return'—';const[h,m]=t.split(':');const hr=parseInt(h),mn=m||'00';return(hr>12?hr-12:hr||12)+':'+mn+(hr>=12?'pm':'am');}
 function nt(){const n=new Date();return String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');}
 
@@ -483,6 +495,7 @@ function renderSched(){
 }
 
 function updateCD(){
+  if(!S.startDate){return;}
   const end=new Date(S.startDate);end.setDate(end.getDate()+90);end.setHours(0,0,0,0);
   let df=Math.max(end-new Date(),0);
   document.getElementById('cd-d').textContent=Math.floor(df/86400000);
@@ -491,7 +504,43 @@ function updateCD(){
   document.getElementById('cd-s').textContent=String(Math.floor(df%60000/1000)).padStart(2,'0');
 }
 
+function setStartDate(){
+  const v=document.getElementById('start-date-input').value;
+  if(!v)return;
+  S.startDate=v;
+  save();
+  document.getElementById('start-banner').style.display='none';
+  document.getElementById('schedule-wrap').style.display='block';
+  renderToday();
+}
+
 function renderToday(){
+  // Show start banner if not started
+  if(!S.startDate){
+    document.getElementById('start-banner').style.display='block';
+    document.getElementById('schedule-wrap').style.display='none';
+    document.getElementById('t-head').textContent='Day —';
+    document.getElementById('t-sub').textContent='Set your start date to begin';
+    document.getElementById('m-phase').textContent='—';
+    document.getElementById('m-pname').textContent='Not started';
+    document.getElementById('m-streak').textContent='0';
+    document.getElementById('m-smk').textContent='0';
+    document.getElementById('m-h2o').textContent='0';
+    document.getElementById('m-prot').textContent='0';
+    document.getElementById('m-kcal').textContent='0';
+    document.getElementById('bp1').style.width='0%';
+    document.getElementById('bp2').style.width='0%';
+    document.getElementById('bp3').style.width='0%';
+    document.getElementById('cd-d').textContent='90';
+    document.getElementById('cd-h').textContent='00';
+    document.getElementById('cd-m').textContent='00';
+    document.getElementById('cd-s').textContent='00';
+    // Set today as default date in input
+    document.getElementById('start-date-input').value=ds();
+    return;
+  }
+  document.getElementById('start-banner').style.display='none';
+  document.getElementById('schedule-wrap').style.display='block';
   const d=dayNum(),p=ph(d),pn={1:'Foundation',2:'Build',3:'Define'};
   document.getElementById('t-head').textContent='Day '+d;
   document.getElementById('t-sub').textContent='Phase '+p+' — '+pn[p];

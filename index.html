@@ -616,138 +616,90 @@ function generateExport(){
   const bl=ms[0]||null;
   const latest=ms[ms.length-1]||null;
   const notes=document.getElementById('export-notes').value||'No notes added.';
-  // Compute averages from log history — use today as sample
   const smkToday=(S.today.smokes||[]).length;
   const wakeToday=S.today.wakeTime||S.wakeTime||'unknown';
   const sleepToday=S.today.sleepTime||'unknown';
   const sleepHrsToday=S.today.sleepHrs||'unknown';
   const protToday=Math.round(S.nut.p||0);
   const circ=calcCircadian(S.wakeTime||'10:30');
-  let sleepAlignNote='';
+  let sleepAlignNote='not logged';
   if(S.today.sleepTime&&circ.sleepTime){
-    const[sh,sm]=S.today.sleepTime.split(':').map(Number);
-    const[rh,rm]=circ.sleepTime.split(':').map(Number);
-    let diff=(sh*60+sm)-(rh*60+rm);
+    const sh=parseInt(S.today.sleepTime.split(':')[0])*60+parseInt(S.today.sleepTime.split(':')[1]);
+    const rh=parseInt(circ.sleepTime.split(':')[0])*60+parseInt(circ.sleepTime.split(':')[1]);
+    let diff=sh-rh;
     if(diff>720)diff-=1440;if(diff<-720)diff+=1440;
     const absDiff=Math.abs(diff);
     sleepAlignNote=absDiff<=30?'ON TARGET':'OFF by ~'+Math.round(absDiff/60*10)/10+'hrs';
   }
-  let measSection='No measurements logged yet.';
+  const SEP='───────────────────────────────────────';
+  const DSEP='═══════════════════════════════════════';
+  let meas='No measurements logged yet.';
   if(bl){
-    measSection='BASELINE (Day '+bl.day+'):
-';
-    if(bl.wt)measSection+='  Weight: '+bl.wt+'kg
-';
-    if(bl.bf)measSection+='  Body fat: '+bl.bf+'%
-';
-    if(bl.wa)measSection+='  Waist: '+bl.wa+'cm
-';
-    if(bl.hi)measSection+='  Hips: '+bl.hi+'cm
-';
-    if(bl.ne)measSection+='  Neck: '+bl.ne+'cm
-';
-    if(bl.ch)measSection+='  Chest: '+bl.ch+'cm
-';
+    const lines=[];
+    lines.push('BASELINE (Day '+bl.day+'):');
+    if(bl.wt)lines.push('  Weight: '+bl.wt+'kg');
+    if(bl.bf)lines.push('  Body fat: '+bl.bf+'%');
+    if(bl.wa)lines.push('  Waist: '+bl.wa+'cm');
+    if(bl.hi)lines.push('  Hips: '+bl.hi+'cm');
+    if(bl.ne)lines.push('  Neck: '+bl.ne+'cm');
+    if(bl.ch)lines.push('  Chest: '+bl.ch+'cm');
     if(latest&&latest!==bl){
-      measSection+='
-LATEST (Day '+latest.day+'):
-';
-      if(latest.wt){const dlt=(latest.wt-bl.wt).toFixed(1);measSection+='  Weight: '+latest.wt+'kg ('+( dlt>0?'+':'')+dlt+')
-';}
-      if(latest.bf){const dlt=(latest.bf-bl.bf).toFixed(1);measSection+='  Body fat: '+latest.bf+'% ('+(dlt>0?'+':'')+dlt+'%)
-';}
-      if(latest.wa){const dlt=(latest.wa-bl.wa).toFixed(1);measSection+='  Waist: '+latest.wa+'cm ('+(dlt>0?'+':'')+dlt+'cm)
-';}
-      if(latest.hi)measSection+='  Hips: '+latest.hi+'cm
-';
-      if(latest.ne)measSection+='  Neck: '+latest.ne+'cm
-';
-      if(latest.ch)measSection+='  Chest: '+latest.ch+'cm
-';
-      if(latest.no)measSection+='  Notes: '+latest.no+'
-';
+      lines.push('');
+      lines.push('LATEST (Day '+latest.day+'):');
+      if(latest.wt){const dlt=(latest.wt-bl.wt).toFixed(1);lines.push('  Weight: '+latest.wt+'kg ('+(dlt>0?'+':'')+dlt+')');}
+      if(latest.bf){const dlt=(latest.bf-bl.bf).toFixed(1);lines.push('  Body fat: '+latest.bf+'% ('+(dlt>0?'+':'')+dlt+'%)');}
+      if(latest.wa){const dlt=(latest.wa-bl.wa).toFixed(1);lines.push('  Waist: '+latest.wa+'cm ('+(dlt>0?'+':'')+dlt+'cm)');}
+      if(latest.hi)lines.push('  Hips: '+latest.hi+'cm');
+      if(latest.ne)lines.push('  Neck: '+latest.ne+'cm');
+      if(latest.ch)lines.push('  Chest: '+latest.ch+'cm');
+      if(latest.no)lines.push('  Notes: '+latest.no);
     }
+    meas=lines.join('\n');
   }
   const streak=S.streak||0;
-  const txt=
-'═══════════════════════════════════════
-'+
-'90-DAY RE-EVALUATION — DAY '+d+'
-'+
-'Date: '+new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})+'
-'+
-'═══════════════════════════════════════
-
-'+
-'SUBJECT: Jihan R., 25yo Male
-'+
-'Height: 170cm | Start weight: 56.1kg
-'+
-'Baseline BF: 22.4% | Phase: '+ph(d)+' ('+{1:'Foundation',2:'Build',3:'Define'}[ph(d)]+')
-
-'+
-'───────────────────────────────────────
-'+
-'BODY MEASUREMENTS
-'+
-'───────────────────────────────────────
-'+
-measSection+'
-'+
-'───────────────────────────────────────
-'+
-'TODAY'S HABITS (sample day)
-'+
-'───────────────────────────────────────
-'+
-'Wake time: '+ft(wakeToday)+'
-'+
-'Circadian sleep target: '+ft(circ.sleepTime)+'
-'+
-'Actual sleep time: '+ft(sleepToday)+'
-'+
-'Hours slept: '+sleepHrsToday+(sleepHrsToday!=='unknown'?'h':'')+'
-'+
-'Sleep alignment: '+(sleepAlignNote||'not logged')+'
-'+
-'Sleep quality: '+(S.today.sleepQuality||'not logged')+'
-'+
-'Protein today: '+protToday+'g (target: 140g)
-'+
-'Water today: '+(S.today.water||0)+' glasses (target: 10)
-'+
-'Smokes today: '+smkToday+' (target: ≤3)
-
-'+
-'───────────────────────────────────────
-'+
-'TRAINING
-'+
-'───────────────────────────────────────
-'+
-'Training streak: '+streak+' sessions completed
-'+
-'Current phase: Phase '+ph(d)+' (Day '+d+' of 90)
-
-'+
-'───────────────────────────────────────
-'+
-'CHECK-IN NOTES
-'+
-'───────────────────────────────────────
-'+
-notes+'
-
-'+
-'───────────────────────────────────────
-'+
-'REQUEST
-'+
-'───────────────────────────────────────
-'+
-'Please re-evaluate my body composition, update my health report with the new measurements, assess my habit progress, flag any concerns, and adjust my nutrition/training targets for the next '+Math.min(20,90-d)+' days.
-'+
-'═══════════════════════════════════════';
+  const pnames={1:'Foundation',2:'Build',3:'Define'};
+  const dateStr=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const daysLeft=Math.min(20,90-d);
+  const parts=[
+    DSEP,
+    '90-DAY RE-EVALUATION — DAY '+d,
+    'Date: '+dateStr,
+    DSEP,'',
+    'SUBJECT: Jihan R., 25yo Male',
+    'Height: 170cm | Start weight: 56.1kg',
+    'Baseline BF: 22.4% | Phase: '+ph(d)+' ('+pnames[ph(d)]+')',
+    '',SEP,
+    'BODY MEASUREMENTS',
+    SEP,
+    meas,
+    '',SEP,
+    'TODAYS HABITS (sample day)',
+    SEP,
+    'Wake time: '+ft(wakeToday),
+    'Circadian sleep target: '+ft(circ.sleepTime),
+    'Actual sleep time: '+ft(sleepToday),
+    'Hours slept: '+sleepHrsToday+(sleepHrsToday!=='unknown'?'h':''),
+    'Sleep alignment: '+sleepAlignNote,
+    'Sleep quality: '+(S.today.sleepQuality||'not logged'),
+    'Protein today: '+protToday+'g (target: 140g)',
+    'Water today: '+(S.today.water||0)+' glasses (target: 10)',
+    'Smokes today: '+smkToday+' (target: 3 or fewer)',
+    '',SEP,
+    'TRAINING',
+    SEP,
+    'Training streak: '+streak+' sessions completed',
+    'Current phase: Phase '+ph(d)+' (Day '+d+' of 90)',
+    '',SEP,
+    'CHECK-IN NOTES',
+    SEP,
+    notes,
+    '',SEP,
+    'REQUEST',
+    SEP,
+    'Please re-evaluate my body composition, update my health report with the new measurements, assess my habit progress, flag any concerns, and adjust my nutrition and training targets for the next '+daysLeft+' days.',
+    DSEP
+  ];
+  const txt=parts.join('\n');
   document.getElementById('export-text').textContent=txt;
   document.getElementById('export-output').style.display='block';
   document.getElementById('export-output').scrollIntoView({behavior:'smooth'});

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recovery & Detox — Jihan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0F0E0C;--ink-2:#3D3C39;--ink-3:#7A7873;--ink-4:#B0AEA8;--paper:#F9F7F2;--paper-2:#FFFFFF;--paper-3:#F2EFE8;--rule:rgba(15,14,12,0.08);--rule-strong:rgba(15,14,12,0.15);--green:#1B5E3B;--green-light:#EAF3EE;--amber:#8B4A00;--amber-light:#FEF3E2;--red:#8B1A1A;--red-light:#FDEAEA;--blue:#1A3A6B;--blue-light:#EAF0FB;}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--paper);color:var(--ink);font-weight:300;font-size:15px;line-height:1.7;}
+nav{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1px solid var(--rule);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:52px;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:17px;font-weight:400;letter-spacing:-0.3px;}
+.nav-links{display:flex;gap:4px;}
+.nav-link{font-size:11px;padding:5px 10px;border-radius:8px;color:var(--ink-4);text-decoration:none;transition:all 0.15s;}
+.nav-link:hover{background:var(--paper-2);color:var(--ink);}
+.nav-link.active{background:var(--ink);color:white;}
+.wrap{max-width:740px;margin:0 auto;padding:0 1.5rem 5rem;}
+.cover{padding:3.5rem 0 2.5rem;border-bottom:1px solid var(--rule-strong);margin-bottom:3rem;}
+.cover-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-4);margin-bottom:1.25rem;display:flex;align-items:center;gap:10px;}
+.cover-eyebrow::after{content:'';flex:1;height:1px;background:var(--rule);}
+.cover-title{font-family:'Playfair Display',serif;font-size:clamp(36px,8vw,56px);font-weight:400;line-height:1.05;letter-spacing:-1.5px;}
+.cover-title em{font-style:italic;color:var(--ink-3);}
+.cover-sub{font-size:13px;color:var(--ink-3);margin-top:1rem;}
+.section{margin-bottom:3rem;animation:up 0.5s ease both;}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.section:nth-child(1){animation-delay:.05s}.section:nth-child(2){animation-delay:.1s}.section:nth-child(3){animation-delay:.15s}.section:nth-child(4){animation-delay:.2s}.section:nth-child(5){animation-delay:.25s}.section:nth-child(6){animation-delay:.3s}.section:nth-child(7){animation-delay:.35s}.section:nth-child(8){animation-delay:.4s}
+.section-header{display:flex;align-items:baseline;gap:14px;margin-bottom:1.5rem;padding-bottom:12px;border-bottom:1px solid var(--rule-strong);}
+.section-num{font-family:'Playfair Display',serif;font-size:13px;color:var(--ink-4);font-style:italic;min-width:24px;}
+.section-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:400;letter-spacing:-0.4px;}
+.section-title em{font-style:italic;color:var(--ink-3);}
+.card{background:var(--paper-2);border:1px solid var(--rule);border-radius:16px;padding:1.5rem;margin-bottom:12px;}
+.card-dark{background:var(--ink);color:#F9F7F2;border-radius:16px;padding:1.75rem;margin-bottom:12px;}
+.card-green{background:var(--green-light);border:1px solid rgba(27,94,59,0.15);border-radius:16px;padding:1.5rem;margin-bottom:12px;}
+.card-amber{background:var(--amber-light);border:1px solid rgba(139,74,0,0.15);border-radius:16px;padding:1.5rem;margin-bottom:12px;}
+.card-blue{background:var(--blue-light);border:1px solid rgba(26,58,107,0.12);border-radius:16px;padding:1.5rem;margin-bottom:12px;}
+.lbl{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-4);margin-bottom:12px;}
+.lbl-green{color:var(--green);}
+.lbl-amber{color:var(--amber);}
+.lbl-blue{color:var(--blue);}
+/* CHECKLIST */
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--rule);cursor:pointer;user-select:none;}
+.check-item:last-child{border-bottom:none;}
+.check-box{width:20px;height:20px;border:1.5px solid var(--rule-strong);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;margin-top:2px;}
+.check-box.done{background:var(--ink);border-color:var(--ink);}
+.check-box.done::after{content:'✓';font-size:11px;color:white;font-weight:600;}
+.check-text{flex:1;}
+.check-title{font-size:14px;font-weight:400;line-height:1.4;}
+.check-title.done{text-decoration:line-through;color:var(--ink-4);}
+.check-sub{font-size:12px;color:var(--ink-3);margin-top:2px;line-height:1.5;}
+/* PROTOCOL ROWS */
+.proto-row{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--rule);font-size:13px;align-items:start;}
+.proto-row:last-child{border-bottom:none;}
+.proto-time{font-weight:500;color:var(--ink);font-size:12px;letter-spacing:0.02em;}
+.proto-body{color:var(--ink-3);line-height:1.6;}
+.proto-body strong{color:var(--ink-2);font-weight:500;}
+/* SUPPLEMENT ROWS */
+.supp-row{display:grid;grid-template-columns:1fr 80px 120px;gap:12px;padding:11px 0;border-bottom:1px solid var(--rule);font-size:13px;align-items:center;}
+.supp-row:last-child{border-bottom:none;}
+.supp-name{font-weight:500;color:var(--ink);}
+.supp-dose{color:var(--ink-3);}
+.supp-time{font-size:11px;color:var(--ink-4);}
+.badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.06em;padding:2px 8px;border-radius:100px;text-transform:uppercase;}
+.badge-green{background:var(--green-light);color:var(--green);}
+.badge-amber{background:var(--amber-light);color:var(--amber);}
+.badge-red{background:var(--red-light);color:var(--red);}
+.badge-blue{background:var(--blue-light);color:var(--blue);}
+/* TIMELINE */
+.timeline{position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:1px;background:var(--rule-strong);}
+.tl-item{position:relative;margin-bottom:1.5rem;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-dot{position:absolute;left:-24px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--ink);border:2px solid var(--paper);}
+.tl-time{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:3px;}
+.tl-title{font-size:14px;font-weight:500;margin-bottom:3px;}
+.tl-body{font-size:13px;color:var(--ink-3);line-height:1.65;}
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+/* PULL QUOTE */
+.pull{font-family:'Playfair Display',serif;font-size:19px;font-style:italic;color:var(--ink-2);border-left:3px solid var(--ink);padding:0.75rem 0 0.75rem 1.5rem;margin:1.5rem 0;line-height:1.5;letter-spacing:-0.2px;}
+.disclaimer{font-size:11px;color:var(--ink-4);line-height:1.75;margin-top:4rem;padding-top:2rem;border-top:1px solid var(--rule-strong);}
+@media(max-width:520px){.proto-row{grid-template-columns:1fr;gap:4px;}.supp-row{grid-template-columns:1fr 1fr;}.supp-time{display:none;}.grid-2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <span class="nav-logo">90 Day</span>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Tracker</a>
+    <a class="nav-link" href="report.html">Report</a>
+    <a class="nav-link active" href="recovery.html">Recovery</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="cover">
+    <div class="cover-eyebrow">Detox · Recovery · Self-Improvement Guide</div>
+    <div class="cover-title">Recovery<br>&amp; <em>Rebuild</em></div>
+    <div class="cover-sub">Your complete protocol for detoxing from smoking, rebuilding your lungs, recovering muscle, and upgrading every system simultaneously.</div>
+  </div>
+
+  <!-- 01 MORNING PROTOCOL -->
+  <div class="section">
+    <div class="section-header"><span class="section-num">01</span><h2 class="section-title">Daily <em>Morning Protocol</em></h2></div>
+    <div class="pull">How you start the first 90 minutes of your day determines the biochemical environment your body operates in for the next 16 hours.</div>
+    <div class="card">
+      <div class="lbl">Wake-to-noon sequence — adapted to your schedule (wake 10–11am)</div>
+      <div class="proto-row"><span class="proto-time">On waking</span><span class="proto-body"><strong>Water first.</strong> 500ml still water immediately. Add a pinch of sea salt or an electrolyte tab — you are dehydrated from 6+ hours of sleep and your kidneys need sodium to retain the water. Do not reach for a cigarette. Set a 15-minute rule: no smoking until at least 15 minutes after waking.</span></div>
+      <div class="proto-row"><span class="proto-time">+10 min</span><span class="proto-body"><strong>Morning light.</strong> Step outside or stand by a bright window for 5 minutes. Natural morning light resets your circadian clock, which is currently misaligned. This is the single most effective action for gradually shifting your sleep timing forward. It triggers cortisol to peak at the right time and primes melatonin to rise earlier in the evening.</span></div>
+      <div class="proto-row"><span class="proto-time">+20 min</span><span class="proto-body"><strong>Coffee or tea.</strong> Black coffee is fine and beneficial — it increases metabolic rate, improves focus, and contains antioxidants. Do not add sugar. Avoid sweetened drinks entirely. Coffee before food on an empty stomach is acceptable for most people.</span></div>
+      <div class="proto-row"><span class="proto-time">+60–90 min</span><span class="proto-body"><strong>Meal 1 — protein anchor.</strong> 3 whole eggs + 2 whites + 60g oats + Greek yogurt. Add turmeric and black pepper to the oats. This is non-negotiable. Skipping this meal means 4–5 hours of cortisol-driven catabolism — your body burns muscle for energy and fat accumulation accelerates.</span></div>
+      <div class="proto-row"><span class="proto-time">Post-meal</span><span class="proto-body"><strong>Supplements.</strong> Take Vitamin C (500mg), Zinc (15mg), B-Complex, Vitamin D3 with your first meal. These replace what smoking depletes daily and need food for absorption.</span></div>
+      <div class="proto-row"><span class="proto-time">Any time AM</span><span class="proto-body"><strong>20-min walk.</strong> Do this without smoking. This is now your clean walk. It primes your cardiovascular system, burns fat while glycogen is partially depleted from sleep, and establishes a movement habit anchor for the rest of the day.</span></div>
+    </div>
+  </div>
+
+  <!-- 02 SMOKING DETOX -->
+  <div class="section">
+    <div class="section-header"><span class="section-num">02</span><h2 class="section-title">Smoking <em>Detox Protocol</em></h2></div>
+    <div class="card-dark">
+      <p style="font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:rgba(249,247,242,0.85);line-height:1.5;margin-bottom:1rem">You cannot out-supplement a 3–5 session daily habit. The protocol below reduces the damage and accelerates the recovery — but reduction is the engine.</p>
+      <p style="font-size:13px;color:rgba(249,247,242,0.55);line-height:1.8">Each cigarette or combustion session generates approximately 4,000+ chemical compounds including acrolein, formaldehyde, benzene, and carbon monoxide. These deplete antioxidants, damage lung epithelial tissue, elevate cortisol, suppress MPS, and trigger psoriatic pathways. The detox protocol is designed to aggressively replenish what combustion strips away and support cellular repair on a daily basis.</p>
+    </div>
+    <div class="card">
+      <div class="lbl lbl-amber">Daily detox nutrition stack — anti-oxidant replenishment</div>
+      <div class="supp-row" style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-4);padding-top:0">
+        <span>Supplement / food</span><span>Dose</span><span>Why it matters</span>
+      </div>
+      <div class="supp-row"><span class="supp-name">Vitamin C</span><span class="supp-dose">500–1,000mg</span><span class="supp-time">With breakfast · replenishes ~35mg destroyed per cigarette</span></div>
+      <div class="supp-row"><span class="supp-name">NAC (N-Acetyl Cysteine)</span><span class="supp-dose">600mg × 2</span><span class="supp-time">Morning + evening · glutathione precursor, thins mucus</span></div>
+      <div class="supp-row"><span class="supp-name">Zinc bisglycinate</span><span class="supp-dose">15–25mg</span><span class="supp-time">With food · smoking depletes zinc → low testosterone + MPS</span></div>
+      <div class="supp-row"><span class="supp-name">B-Complex</span><span class="supp-dose">Standard dose</span><span class="supp-time">Morning · B12 depleted by smoking, B6 for MPS</span></div>
+      <div class="supp-row"><span class="supp-name">Broccoli (sulforaphane)</span><span class="supp-dose">150g cooked</span><span class="supp-time">Daily · activates Nrf2 lung detox pathway</span></div>
+      <div class="supp-row"><span class="supp-name">Walnuts</span><span class="supp-dose">30g / handful</span><span class="supp-time">Daily · ALA omega-3, Vitamin E for lung membranes</span></div>
+      <div class="supp-row"><span class="supp-name">Berries (blueberry / blackberry)</span><span class="supp-dose">80–100g</span><span class="supp-time">Daily · anthocyanins neutralise ROS from combustion</span></div>
+      <div class="supp-row"><span class="supp-name">Green tea</span><span class="supp-dose">2 cups/day</span><span class="supp-time">EGCG catechins — lung protective, anti-inflammatory</span></div>
+      <div class="supp-row"><span class="supp-name">Turmeric + black pepper</span><span class="supp-dose">1 tsp + pinch</span><span class="supp-time">Daily cooking · curcumin reduces NF-κB (psoriasis + lung)</span></div>
+    </div>
+    <div class="card-green">
+      <div class="lbl lbl-green">Smoking reduction roadmap — 90 days</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Days 1–30</div><div class="tl-title">Delay and decouple</div><div class="tl-body">Push first session to 15 min after waking minimum. Remove the walk-smoke habit completely — walk is clean. Reduce from 3–5 sessions to 2–3. Switch to rolling tobacco only (no additives) if not already.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Days 31–60</div><div class="tl-title">Eliminate combustion for THC</div><div class="tl-body">Switch THC delivery to a dry herb vaporiser at 170–185°C. This delivers cannabinoids while eliminating the combustion products responsible for 90% of the lung and inflammatory damage. Tobacco: reduce to 1–2 sessions per day.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Days 61–90</div><div class="tl-title">Tobacco to near-zero</div><div class="tl-body">By Day 60 your training performance will have visibly improved, your skin will be noticeably better, and your sleep will be deeper. These are self-reinforcing. Tobacco: 0–1 per day. The physical dependence has substantially reduced by this point — what remains is habit and association.</div></div>
+        <div class="tl-item"><div class="tl-dot" style="background:var(--green)"></div><div class="tl-time">Day 90+</div><div class="tl-title">Post-quit lung timeline</div><div class="tl-body">12hrs: CO clears, O2 capacity restores. 72hrs: cilia regrow in bronchial lining. 2–4 weeks: lung function measurably improves. 3 months: MPS normalises, training results accelerate. 1 year: cardiovascular risk halved.</div></div>
+      </div>
+    </div>
+    <div class="card-amber">
+      <div class="lbl lbl-amber">Craving management — practical tools</div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Deep breathing (4-7-8 method)</div><div class="check-sub">Inhale 4 counts, hold 7, exhale 8. Activates parasympathetic nervous system. Use when a craving peaks — cravings peak at 3–5 min then pass.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Cold water on wrists during craving</div><div class="check-sub">Reduces cortisol spike associated with withdrawal. Simple and immediate.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Delay by 5 minutes</div><div class="check-sub">Tell yourself you will smoke in 5 minutes. Most cravings pass before the 5 minutes are up.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Chew gum or drink water instead</div><div class="check-sub">The oral fixation component of smoking is real. Chewing gum or drinking water addresses the physical urge without the damage.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Track sessions in your journal</div><div class="check-sub">Just logging how many you had today creates awareness and accountability. You cannot manage what you do not measure.</div></div></div>
+    </div>
+  </div>
+
+  <!-- 03 MUSCLE RECOVERY -->
+  <div class="section">
+    <div class="section-header"><span class="section-num">03</span><h2 class="section-title">Muscle <em>Recovery Protocol</em></h2></div>
+    <div class="card">
+      <div class="lbl">Post-training recovery checklist — do this every session</div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Eat within 45 minutes of finishing</div><div class="check-sub">30–40g protein + 30–50g carbs. MPS is maximally elevated in this window. Greek yogurt + banana or rice + chicken. This is your most impactful nutritional decision of the day.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Shower immediately</div><div class="check-sub">Within 20 minutes. Lukewarm water — hot water on psoriasis patches causes irritation. Fragrance-free wash. Apply moisturiser within 3 minutes of stepping out.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">No ibuprofen within 4 hours post-training</div><div class="check-sub">NSAIDs blunt the inflammatory signal required for muscle repair. If you are in pain, ice and elevation first. Paracetamol is acceptable as it does not interfere with MPS.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Drink 500ml water post-session</div><div class="check-sub">You lose 500ml–1L of water through sweat in a 30-minute bodyweight session. Hydration is directly required for protein synthesis and glycogen replenishment.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Do not train same muscle group if still sore</div><div class="check-sub">Significant soreness = active repair in progress. Training on top of this does not produce double the stimulus — it disrupts the repair process. 48–72 hours is the minimum recovery window.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Casein protein or cottage cheese before 10:30pm</div><div class="check-sub">180g cottage cheese = 20g slow-digesting casein. Feeds muscle repair through sleep for 6–8 hours. Growth hormone pulses during deep sleep — you need amino acids available during this window.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Magnesium glycinate 300mg before sleep</div><div class="check-sub">Deepens slow-wave sleep — the phase where 70% of growth hormone is released. Also reduces muscle cramping and DOMS. Take 45 minutes before you want to sleep.</div></div></div>
+    </div>
+    <div class="card-blue">
+      <div class="lbl lbl-blue">Active recovery — what to do on rest days</div>
+      <div class="proto-row"><span class="proto-time">20–30 min walk</span><span class="proto-body">Low-intensity movement increases blood flow to recovering muscles, accelerating nutrient delivery and waste removal without adding training stress. This is not optional recovery — it is active recovery.</span></div>
+      <div class="proto-row"><span class="proto-time">Stretching 10 min</span><span class="proto-body">Focus: hip flexors (damaged by sitting), hamstrings, chest/pec. Video: search "10 min full body stretch routine" on YouTube. Improves range of motion needed for Phase 2 and 3 exercises.</span></div>
+      <div class="proto-row"><span class="proto-time">Cold water finish</span><span class="proto-body">End your shower with 30–60 seconds of cold water. Reduces systemic inflammation, improves circulation, and has documented mood benefits via norepinephrine release. Start with 15 seconds if needed. Build up.</span></div>
+      <div class="proto-row"><span class="proto-time">Protein still 140g</span><span class="proto-body">MPS remains elevated for 24–72 hours post-training. Rest days are still muscle-building days — your body is remodelling the tissue. Hitting protein targets on rest days is as important as on training days.</span></div>
+      <div class="proto-row"><span class="proto-time">Mobility work</span><span class="proto-body">For your weak shoulders specifically: 10 min band work — face pulls, pull-aparts, and wall slides on rest days. This builds the stabiliser base that allows Phase 2 shoulder reintroduction safely.</span></div>
+    </div>
+    <div class="card">
+      <div class="lbl">Sleep protocol — your most powerful recovery tool</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Target: asleep by 2am</div><div class="tl-title">Start with this single shift</div><div class="tl-body">Do not try to fix 5am sleep overnight — it causes insomnia. Push back 30 minutes every 5 days. From 5am → 4:30am → 4am → 3:30am → 3am → 2am over 5 weeks. This is physiologically sound and achievable.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">1 hour before sleep</div><div class="tl-title">Wind-down sequence</div><div class="tl-body">Take Magnesium glycinate 300mg. Dim all screens or switch to night mode. No food after 10:30pm. If THC is being used, this is the acceptable window — keep it here, not earlier in the evening when it will disrupt daytime function.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-time">Why this matters</div><div class="tl-title">Growth hormone and the early sleep window</div><div class="tl-body">Growth hormone (GH) is secreted in its largest daily pulse in the first slow-wave sleep cycle. The earlier this cycle starts, the more aligned it is with the natural GH peak. Shifting sleep from 5am to 2am means capturing 3 hours of peak anabolic recovery you are currently missing entirely. This single change will accelerate your physical transformation more than most training variables.</div></div>
+        <div class="tl-item"><div class="tl-dot" style="background:var(--green)"></div><div class="tl-time">Sleep environment</div><div class="tl-title">Optimise the room</div><div class="tl-body">Temperature 18–20°C is optimal for sleep — cooler than you think. Blackout curtains or an eye mask if needed. No phone screen in the last 30 minutes. Bedroom = sleep + sex only — working or scrolling in bed trains your brain to be alert there.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 LUNG RECOVERY -->
+  <div class="section">
+    <div class="section-header"><span class="section-num">04</span><h2 class="section-title">Lung <em>Recovery Protocol</em></h2></div>
+    <div class="card">
+      <div class="lbl">Daily lung support habits</div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Diaphragmatic breathing — 5 min daily</div><div class="check-sub">Lie on your back. Place one hand on chest, one on belly. Breathe so only the belly hand rises. Inhale 4 counts, exhale 6 counts. This strengthens the diaphragm, increases lung volume, and reduces residual air volume in the lower lobes. Do this every morning. <a href="https://www.youtube.com/results?search_query=diaphragmatic+breathing+tutorial+technique" target="_blank" rel="noopener" style="color:var(--blue);font-size:11px">Watch tutorial →</a></div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Eat broccoli 4–5x per week</div><div class="check-sub">Sulforaphane in broccoli activates the Nrf2 pathway — the body's master cellular detoxification system. Studies in smokers show it activates lung detox enzymes within hours. Chop broccoli and let it sit 5 minutes before cooking to maximise sulforaphane content.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">2 cups green tea daily</div><div class="check-sub">EGCG in green tea is one of the best-studied natural compounds for lung protection in smokers. It neutralises free radicals in bronchial tissue and reduces oxidative stress markers. Replace one coffee with green tea.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Humidify your sleep environment</div><div class="check-sub">Dry air — common in apartments and particularly relevant for Tbilisi winters — desiccates bronchial mucus and impairs the mucociliary clearance that removes inhaled particles. A simple humidifier running at night reduces this. Targets 40–60% relative humidity.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Take NAC 600mg twice daily</div><div class="check-sub">N-Acetyl Cysteine is the most evidence-backed supplement for smokers. It replenishes glutathione, thins bronchial mucus (making it easier to clear), and has been shown to reduce respiratory symptoms in chronic smokers within 4–8 weeks.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Never smoke immediately before exercise</div><div class="check-sub">Carbon monoxide from combustion binds haemoglobin with 200x the affinity of oxygen, reducing O2 delivery to working muscles. Wait minimum 45 minutes after any smoking session before training. Pre-workout smoking is the most counterproductive pattern possible.</div></div></div>
+      <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text"><div class="check-title">Cardio frequency — even light cardio helps</div><div class="check-sub">The 20-minute daily walk already helps. As training progresses, aerobic conditioning directly strengthens respiratory muscles (diaphragm, intercostals) and increases VO2 max. Each Phase adds more conditioning work for this reason.</div></div></div>
+    </div>
+    <div class="grid-2">
+      <div class="card-green">
+        <div class="lbl lbl-green">Lung-healing foods</div>
+        <div style="font-size:13px;color:var(--ink-3);line-height:2">
+          Broccoli — sulforaphane<br>
+          Salmon — omega-3 EPA/DHA<br>
+          Walnuts — ALA + Vitamin E<br>
+          Sweet potato — beta-carotene<br>
+          Apples — quercetin<br>
+          Ginger — gingerols<br>
+          Green tea — EGCG<br>
+          Berries — anthocyanins<br>
+          Garlic — allicin (anti-microbial)<br>
+          Olive oil — oleocanthal
+        </div>
+      </div>
+      <div class="card" style="background:var(--red-light);border-color:rgba(139,26,26,0.1)">
+        <div class="lbl" style="color:var(--red)">Lung-damaging habits</div>
+        <div style="font-size:13px;color:var(--ink-3);line-height:2">
+          Combustion smoking (any)<br>
+          Vaping (propylene glycol)<br>
+          Processed seed oils<br>
+          Alcohol — inflammation<br>
+          Dry indoor air — no humidifier<br>
+          Sleeping in dusty environment<br>
+          Air fresheners — VOCs<br>
+          Cleaning sprays — inhaled<br>
+          Mould exposure<br>
+          Heavily polluted outdoor air
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 PSORIASIS DAILY -->
+  <div class="section">
+    <div class="section-header"><span class="section-num">05</span><h2 class="section-title">Psoriasis <em>Daily Management</em></h2></div>
+    <div class="card">
+      <div class="lbl">Daily skin protocol — morning and evening</div>
+      <div class="proto-row"><span class="proto-time">Morning shower</span><span class="proto-body"><strong>Lukewarm only.</strong> Hot water triggers vasodilation and histamine release — both aggravate psoriatic plaques. Use a fragrance-free, sulphate-free body wash. Maximum 10 minutes. Pat dry — do not rub.</span></div>
+      <div class="proto-row"><span class="proto-time">Post-shower (3 min)</span><span class="proto-body"><strong>Moisturise immediately.</strong> Apply within 3 minutes while skin is still slightly damp. Use a thick fragrance-free emollient — Cetaphil, Eucerin, CeraVe, or equivalent. This is not optional. Moisturising dry psoriatic skin is as important as any medication.</span></div>
+      <div class="proto-row"><span class="proto-time">Midday (Tbilisi)</span><span class="proto-body"><strong>Sun therapy.</strong> 15–20 minutes of direct midday sun on affected patches, April–September. Build from 10 minutes. Apply SPF 30+ to non-affected skin after 20 minutes. This is UVB phototherapy at no cost.</span></div>
+      <div class="proto-row"><span class="proto-time">Post-training</span><span class="proto-body"><strong>Shower within 20 min.</strong> Sweat contains urea and lactic acid that irritate plaques. Same protocol as morning — lukewarm, fragrance-free, moisturise immediately after.</span></div>
+      <div class="proto-row"><span class="proto-time">Evening</span><span class="proto-body"><strong>Second moisturise if dry.</strong> Any time skin feels tight or dry — apply again. Skin hydration is the most cost-effective psoriasis management tool available. Dehydrated psoriatic skin flares faster and heals slower.</span></div>
+      <div class="proto-row"><span class="proto-time">Clothing</span><span class="proto-body"><strong>Loose, breathable fabrics.</strong> Friction on psoriatic skin triggers Koebner phenomenon — new plaques appearing at sites of mechanical trauma. Tight clothing, rough fabrics, and elastic waistbands on affected areas all contribute. In Tbilisi heat: linen and cotton are your best options.</span></div>
+    </div>
+    <div class="card-green">
+      <div class="lbl lbl-green">Anti-psoriasis supplement additions</div>
+      <div class="supp-row" style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-4);padding-top:0"><span>Supplement</span><span>Dose</span><span>Mechanism</span></div>
+      <div class="supp-row"><span class="supp-name">Vitamin D3 + K2</span><span class="supp-dose">3,000 IU D3</span><span class="supp-time">Regulates keratinocyte proliferation — the core psoriasis mechanism</span></div>
+      <div class="supp-row"><span class="supp-name">Fish oil (EPA/DHA)</span><span class="supp-dose">2–3g/day</span><span class="supp-time">Reduces IL-17 and TNF-α — the cytokines driving psoriatic inflammation</span></div>
+      <div class="supp-row"><span class="supp-name">Turmeric (curcumin)</span><span class="supp-dose">1 tsp daily + pepper</span><span class="supp-time">Inhibits NF-κB — master switch of psoriatic inflammation</span></div>
+      <div class="supp-row"><span class="supp-name">Probiotics</span><span class="supp-dose">Standard dose</span><span class="supp-time">Gut microbiome dysbiosis is linked to psoriasis severity — repair gut to reduce skin inflammation</span></div>
+      <div class="supp-row"><span class="supp-name">Zinc</span><span class="supp-dose">15–25mg/day</span><span class="supp-time">Zinc deficiency worsens psoriasis — topical and oral zinc both show clinical benefit</span></div>
+    </div>
+  </div>
+
+  <!-- 06 SUPPLEMENTS MASTER -->
+  <div class="section">
+    <div class="section-header"><span class="section-num">06</span><h2 class="section-title">Complete <em>Supplement Stack</em></h2></div>
+    <div class="card">
+      <div class="lbl">Full daily stack — prioritised and timed</div>
+      <div style="display:grid;grid-template-columns:1fr 80px 100px 1fr;gap:10px;padding-bottom:8px;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-4);">
+        <span>Supplement</span><span>Dose</span><span>When</span><span>Priority</span>
+      </div>
+      <div style="border-top:1px solid var(--rule)">
+        <div style="display:grid;grid-template-columns:1fr 80px 100px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:13px;align-items:center;"><span style="font-weight:500">Creatine monohydrate</span><span style="color:var(--ink-3)">5g</span><span style="color:var(--ink-3)">Any time</span><span><span class="badge badge-green">Highest</span></span></div>
+        <div style="display:grid;grid-template-columns:1fr 80px 100px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:13px;align-items:center;"><span style="font-weight:500">Vitamin C</span><span style="color:var(--ink-3)">500–1,000mg</span><span style="color:var(--ink-3)">Breakfast</span><span><span class="badge badge-green">Highest</span></span></div>
+        <div style="display:grid;grid-template-columns:1fr 80px 100px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:13px;align-items:center;"><span style="font-weight:500">Zinc bisglycinate</span><span style="color:var(--ink-3)">15–25mg</span><span style="color:var(--ink-3)">With food</span><span><span class="badge badge-green">Highest</span></span></div>
+        <div style="display:grid;grid-template-columns:1fr 80px 100px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:13px;align-items:center;"><span style="font-weight:500">NAC</span><span style="color:var(--ink-3)">600mg × 2</span><span style="color:var(--ink-3)">AM + PM</span><span><span class="badge badge-green">Highest</span></span></div>
+        <div style="display:grid;grid-template-columns:1fr 80px 100px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:13px;align-items:center;"><span style="font-weight:500">Magnesium glycinate</span><span style="color:var(--ink-3)">300–400mg</span><span style="color:var(--ink-3)">45min pre-sleep</span><span><span class="badge badge-amber">High</span></span></div>
+        <div style="display:grid;grid-template-columns:1fr 80px 100px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:13px;align-items:center;"><span style="font-weight:500">Vitamin D3 + K2</span><span style="color:var(--ink-3)">3,000 IU + 100mcg</span><span style="color:var(--ink-3)">With fatty meal</span><span><span class="badge badge-amber">High</span></span></div>
+        <div style="display:grid;grid-template-columns:1fr 80px 100px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:13px;align-items:center;"><span style="font-weight:500">Omega-3 fish oil</span><span style="color:var(--ink-3)">2–3g EPA+DHA</span><span style="color:var(--ink-3)">With meals</span><span><span class="badge badge-amber">High</span></span></div>
+        <div style="display:grid;grid-template-columns:1fr 80px 100px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:13px;align-items:center;"><span style="font-weight:500">B-Complex</span><span style="color:var(--ink-3)">Standard</span><span style="color:var(--ink-3)">Breakfast</span><span><span class="badge badge-blue">Moderate</span></span></div>
+        <div style="display:grid;grid-template-columns:1fr 80px 100px 1fr;gap:10px;padding:10px 0;font-size:13px;align-items:center;"><span style="font-weight:500">Probiotics</span><span style="color:var(--ink-3)">Standard</span><span style="color:var(--ink-3)">Morning, empty</span><span><span class="badge badge-blue">Moderate</span></span></div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--ink-4);line-height:1.7;padding:0 4px">Start with just the top 4 (Creatine, Vitamin C, Zinc, NAC). Add Magnesium and D3 in week 2. Add fish oil and B-Complex in week 3. Stagger introductions so you can identify anything that doesn't agree with you.</p>
+  </div>
+
+  <!-- 07 SELF IMPROVEMENT -->
+  <div class="section">
+    <div class="section-header"><span class="section-num">07</span><h2 class="section-title">Self-Improvement <em>System</em></h2></div>
+    <div class="pull">The body is the foundation. Everything else — focus, output, energy, confidence — runs on top of it.</div>
+    <div class="card">
+      <div class="lbl">The perfect day — built around your schedule</div>
+      <div class="proto-row"><span class="proto-time">10:30am</span><span class="proto-body"><strong>Wake.</strong> Water 500ml. Window light 5 min. No phone for first 10 minutes — this prevents cortisol spike from digital stimulation before your nervous system is ready.</span></div>
+      <div class="proto-row"><span class="proto-time">11am</span><span class="proto-body"><strong>Coffee + supplements.</strong> Vitamin C, Zinc, B-Complex, D3. First coffee of the day.</span></div>
+      <div class="proto-row"><span class="proto-time">12pm</span><span class="proto-body"><strong>Meal 1.</strong> 3 eggs + oats + Greek yogurt + berries. Eat this before any business work. Your brain runs on glucose — no fuel = no focus.</span></div>
+      <div class="proto-row"><span class="proto-time">12:30–3pm</span><span class="proto-body"><strong>Deep work block.</strong> Ninth Protocol, Fulcrum Motors, or trading — whichever is the highest-priority task. Phone on do-not-disturb. This is your highest-focus window post-meal.</span></div>
+      <div class="proto-row"><span class="proto-time">3pm</span><span class="proto-body"><strong>Snack.</strong> Cottage cheese + fruit + walnuts. 20–30g protein. Walk — clean, no smoking.</span></div>
+      <div class="proto-row"><span class="proto-time">4–5pm</span><span class="proto-body"><strong>Training session.</strong> 25–45 min depending on phase. Follow the workout plan. Use the timer for rest intervals.</span></div>
+      <div class="proto-row"><span class="proto-time">5:30pm</span><span class="proto-body"><strong>Post-workout meal.</strong> Salmon or chicken + rice + broccoli. This is Meal 2 and your biggest of the day.</span></div>
+      <div class="proto-row"><span class="proto-time">6–9pm</span><span class="proto-body"><strong>Second work block.</strong> Admin, calls, strategy. Less cognitively demanding than the morning block — use this for execution tasks.</span></div>
+      <div class="proto-row"><span class="proto-time">9pm</span><span class="proto-body"><strong>Wind-down begins.</strong> Screens dim. No new work started. This is the boundary for business thinking — anything that comes up goes into a note for tomorrow.</span></div>
+      <div class="proto-row"><span class="proto-time">10pm</span><span class="proto-body"><strong>Last food.</strong> Cottage cheese if hungry. Magnesium glycinate 300mg. Journal entry — 3 sentences: what you did, what you learned, what tomorrow needs.</span></div>
+      <div class="proto-row"><span class="proto-time">10:30pm</span><span class="proto-body"><strong>Hard food cutoff.</strong> Nothing after this point. No exceptions during the 90 days.</span></div>
+      <div class="proto-row"><span class="proto-time">1:30–2am</span><span class="proto-body"><strong>Sleep.</strong> Target by Day 30. Room cool and dark. Phone face down or outside the room.</span></div>
+    </div>
+    <div class="grid-2">
+      <div class="card-green">
+        <div class="lbl lbl-green">Habits that compound</div>
+        <div style="font-size:13px;color:var(--ink-3);line-height:2.1">
+          Daily 20-min walk — always<br>
+          Meal 1 within 90 min of waking<br>
+          No food after 10:30pm<br>
+          Phone away at sleep<br>
+          Journal — 3 sentences/day<br>
+          Supplements with breakfast<br>
+          Magnesium before sleep<br>
+          Sun on psoriasis skin daily<br>
+          Moisturise post-shower<br>
+          Track protein in the app
+        </div>
+      </div>
+      <div class="card-amber">
+        <div class="lbl lbl-amber">30-day milestone checks</div>
+        <div style="font-size:13px;color:var(--ink-3);line-height:2.1">
+          Day 30: re-measure waist + neck<br>
+          Day 30: progress photo (same light)<br>
+          Day 30: count training sessions<br>
+          Day 30: avg protein per day<br>
+          Day 60: full re-measure all<br>
+          Day 60: second progress photo<br>
+          Day 60: smoking sessions per day<br>
+          Day 90: full re-measure<br>
+          Day 90: final photo comparison<br>
+          Day 90: update health report
+        </div>
+      </div>
+    </div>
+    <div class="card-dark">
+      <p style="font-family:'Playfair Display',serif;font-size:20px;font-style:italic;color:rgba(249,247,242,0.85);line-height:1.5;margin-bottom:1rem">Every system in this guide is built around one principle: reduce the load on your body while increasing the inputs it needs to repair and build. That is the entire equation.</p>
+      <p style="font-size:13px;color:rgba(249,247,242,0.5);line-height:1.8">You are not starting from scratch. You are starting with a body that is 25, highly responsive, and currently being held back by a handful of specific, fixable patterns. Remove the suppressors. Add the inputs. The results are not motivational — they are mechanistic. Fix the inputs, the outputs follow.</p>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    This guide is based on established nutritional science, exercise physiology, and clinical literature on smoking cessation and psoriasis management. It is a personal health and lifestyle reference, not a medical prescription. Supplement recommendations are general and evidence-based — consult a GP before starting high-dose supplements if you have any underlying conditions. NAC in particular should be discussed with a healthcare provider if you have a history of kidney issues.
+  </div>
+
+</div>
+
+<script>
+function toggleCheck(el){
+  const box=el.querySelector('.check-box'),title=el.querySelector('.check-title');
+  box.classList.toggle('done');
+  if(title)title.classList.toggle('done');
+}
+</script>
+</body>
+</html>

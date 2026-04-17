@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Health Report — Jihan R.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0F0E0C;
+  --ink-2: #3D3C39;
+  --ink-3: #7A7873;
+  --ink-4: #B0AEA8;
+  --paper: #F9F7F2;
+  --paper-2: #FFFFFF;
+  --paper-3: #F2EFE8;
+  --rule: rgba(15,14,12,0.08);
+  --rule-strong: rgba(15,14,12,0.15);
+  --green: #1B5E3B;
+  --green-light: #EAF3EE;
+  --amber: #8B4A00;
+  --amber-light: #FEF3E2;
+  --red: #8B1A1A;
+  --red-light: #FDEAEA;
+  --blue: #1A3A6B;
+  --blue-light: #EAF0FB;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ─── LAYOUT ─── */
+.wrap { max-width: 740px; margin: 0 auto; padding: 0 1.5rem 6rem; }
+
+/* ─── COVER ─── */
+.cover {
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid var(--rule-strong);
+  margin-bottom: 3.5rem;
+  position: relative;
+}
+.cover-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cover-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(40px, 9vw, 68px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 0.5rem;
+}
+.cover-title em {
+  font-style: italic;
+  color: var(--ink-3);
+}
+.cover-sub {
+  font-size: 13px;
+  color: var(--ink-3);
+  margin-top: 1.25rem;
+  letter-spacing: 0.04em;
+}
+.cover-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+.cover-stat {
+  background: var(--paper-2);
+  padding: 1rem 1.25rem;
+  text-align: center;
+}
+.cover-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.cover-stat-lbl {
+  font-size: 10px;
+  color: var(--ink-4);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+
+/* ─── TOC ─── */
+.toc {
+  background: var(--paper-3);
+  border-radius: 14px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 3.5rem;
+}
+.toc-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 1rem;
+}
+.toc-list { list-style: none; }
+.toc-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.toc-item:last-child { border-bottom: none; }
+.toc-num {
+  font-size: 10px;
+  color: var(--ink-4);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  min-width: 28px;
+}
+
+/* ─── SECTION ─── */
+.section {
+  margin-bottom: 3.5rem;
+  animation: up 0.6s ease both;
+}
+@keyframes up { from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)} }
+.section:nth-child(1){animation-delay:.05s}.section:nth-child(2){animation-delay:.1s}
+.section:nth-child(3){animation-delay:.15s}.section:nth-child(4){animation-delay:.2s}
+.section:nth-child(5){animation-delay:.25s}.section:nth-child(6){animation-delay:.3s}
+.section:nth-child(7){animation-delay:.35s}.section:nth-child(8){animation-delay:.4s}
+.section:nth-child(9){animation-delay:.45s}.section:nth-child(10){animation-delay:.5s}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 1.75rem;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule-strong);
+}
+.section-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  color: var(--ink-4);
+  font-style: italic;
+  min-width: 24px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: -0.4px;
+}
+.section-title em { font-style: italic; color: var(--ink-3); }
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 12px;
+}
+.card-dark {
+  background: var(--ink);
+  color: #F9F7F2;
+  border-color: var(--ink);
+  border-radius: 16px;
+  padding: 1.75rem;
+  margin-bottom: 12px;
+}
+.card-tinted-green { background: var(--green-light); border: 1px solid rgba(27,94,59,0.15); border-radius: 16px; padding: 1.5rem; margin-bottom: 12px; }
+.card-tinted-amber { background: var(--amber-light); border: 1px solid rgba(139,74,0,0.15); border-radius: 16px; padding: 1.5rem; margin-bottom: 12px; }
+.card-tinted-red { background: var(--red-light); border: 1px solid rgba(139,26,26,0.12); border-radius: 16px; padding: 1.5rem; margin-bottom: 12px; }
+.card-tinted-blue { background: var(--blue-light); border: 1px solid rgba(26,58,107,0.12); border-radius: 16px; padding: 1.5rem; margin-bottom: 12px; }
+
+/* ─── STAT GRIDS ─── */
+.stat-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.stat-grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 10px; }
+.stat-grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 10px; }
+.stat { background: var(--paper-2); border: 1px solid var(--rule); border-radius: 12px; padding: 1.1rem 1.25rem; }
+.stat.dark { background: var(--ink); border-color: var(--ink); }
+.stat-n {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+.stat.dark .stat-n { color: #F9F7F2; }
+.stat-u { font-size: 13px; color: var(--ink-4); }
+.stat.dark .stat-u { color: rgba(249,247,242,0.45); }
+.stat-l { font-size: 11px; color: var(--ink-4); margin-top: 5px; letter-spacing: 0.02em; }
+.stat.dark .stat-l { color: rgba(249,247,242,0.5); }
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 3px 9px;
+  border-radius: 100px;
+  margin-top: 7px;
+  text-transform: uppercase;
+}
+.badge-green { background: var(--green-light); color: var(--green); }
+.badge-amber { background: var(--amber-light); color: var(--amber); }
+.badge-red { background: var(--red-light); color: var(--red); }
+.badge-neutral { background: var(--paper-3); color: var(--ink-3); }
+.badge-dark { background: rgba(249,247,242,0.12); color: rgba(249,247,242,0.75); }
+
+/* ─── BODY COMP BAR ─── */
+.comp-bar { display: flex; height: 22px; border-radius: 11px; overflow: hidden; margin: 12px 0 8px; }
+.comp-fat { background: #C8882A; }
+.comp-muscle { background: #2D7A50; }
+.comp-other { background: #B0AEA8; }
+.comp-legend { display: flex; gap: 18px; font-size: 11px; color: var(--ink-3); flex-wrap: wrap; }
+.cdot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: middle; }
+
+/* ─── BF SPECTRUM ─── */
+.spectrum-wrap { position: relative; margin: 1rem 0 2rem; }
+.spectrum-bar { height: 10px; border-radius: 5px; background: linear-gradient(90deg, #2D7A50 0%, #7AB648 20%, #E8C240 45%, #E88C20 70%, #C0392B 100%); }
+.spectrum-zones { display: flex; font-size: 10px; color: var(--ink-4); margin-top: 6px; }
+.spectrum-zone { text-align: center; }
+.spectrum-pointer {
+  position: absolute;
+  top: -6px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pointer-pin { width: 3px; height: 22px; background: var(--ink); border-radius: 2px; }
+.pointer-lbl {
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--ink);
+  color: #F9F7F2;
+  padding: 2px 7px;
+  border-radius: 100px;
+  margin-bottom: 2px;
+  letter-spacing: 0.05em;
+}
+
+/* ─── DATA TABLE ─── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  padding: 8px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--rule-strong);
+}
+.data-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: middle;
+  color: var(--ink-2);
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--paper-3); }
+.td-label { color: var(--ink-3); font-size: 12px; }
+.td-strong { font-weight: 500; color: var(--ink); }
+.delta-pos { background: var(--green-light); color: var(--green); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+.delta-neg { background: var(--red-light); color: var(--red); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+.delta-neu { background: var(--paper-3); color: var(--ink-3); font-size: 11px; padding: 2px 8px; border-radius: 100px; }
+
+/* ─── RISK ROWS ─── */
+.risk-list { }
+.risk-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.risk-item:last-child { border-bottom: none; }
+.risk-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-top: 3px;
+  flex-shrink: 0;
+  width: 28px;
+}
+.risk-dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-critical { background: #C0392B; }
+.dot-high { background: #E07820; }
+.dot-moderate { background: #D4BC20; }
+.dot-low { background: #2D7A50; }
+.risk-severity { font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-4); writing-mode: vertical-lr; transform: rotate(180deg); }
+.risk-content { flex: 1; }
+.risk-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; color: var(--ink); }
+.risk-body { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+
+/* ─── NUTRITION TABLES ─── */
+.meal-plan { }
+.meal-block {
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.meal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--paper-3);
+  border-bottom: 1px solid var(--rule);
+}
+.meal-time { font-size: 12px; font-weight: 600; color: var(--ink); letter-spacing: 0.05em; }
+.meal-macro-summary { font-size: 11px; color: var(--ink-3); }
+.meal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+}
+.meal-row:last-child { border-bottom: none; }
+.meal-food { color: var(--ink-2); }
+.meal-macros { display: flex; gap: 12px; font-size: 11px; }
+.mp { color: var(--green); font-weight: 500; }
+.mc { color: var(--blue); }
+.mf { color: var(--amber); }
+.meal-portion { color: var(--ink-4); font-size: 12px; min-width: 80px; text-align: right; }
+
+/* ─── NUTRIENT TABLE ─── */
+.nutrient-row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+  align-items: start;
+}
+.nutrient-row:last-child { border-bottom: none; }
+.nutrient-name { font-weight: 500; color: var(--ink); }
+.nutrient-role { color: var(--ink-3); font-size: 12px; line-height: 1.5; }
+.nutrient-source { color: var(--ink-2); font-size: 12px; line-height: 1.5; }
+
+/* ─── RECOVERY PROTOCOL ─── */
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before { content:''; position:absolute; left:8px; top:8px; bottom:8px; width:1px; background:var(--rule-strong); }
+.timeline-item { position: relative; margin-bottom: 1.5rem; }
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-dot { position:absolute; left:-24px; top:4px; width:10px; height:10px; border-radius:50%; background:var(--ink); border:2px solid var(--paper); }
+.timeline-time { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 4px; }
+.timeline-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+.timeline-body { font-size: 13px; color: var(--ink-3); line-height: 1.65; }
+
+/* ─── DO / DON'T ─── */
+.do-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.do-col { border-radius: 14px; padding: 1.5rem; }
+.do-col-green { background: var(--green-light); border: 1px solid rgba(27,94,59,0.15); }
+.do-col-red { background: var(--red-light); border: 1px solid rgba(139,26,26,0.1); }
+.do-header { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1rem; }
+.do-col-green .do-header { color: var(--green); }
+.do-col-red .do-header { color: var(--red); }
+.do-item { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px solid rgba(0,0,0,0.06); font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+.do-item:last-child { border-bottom: none; }
+.do-arrow { color: var(--ink-4); flex-shrink: 0; font-size: 11px; margin-top: 2px; }
+
+/* ─── GOAL TABLE ─── */
+.goal-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+  align-items: center;
+}
+.goal-row:last-child { border-bottom: none; }
+.goal-metric { color: var(--ink-3); }
+.goal-current { color: var(--ink-2); }
+.goal-target { font-weight: 500; color: var(--green); }
+
+/* ─── PULL QUOTE ─── */
+.pull-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-2);
+  border-left: 3px solid var(--ink);
+  padding: 0.75rem 0 0.75rem 1.5rem;
+  margin: 1.5rem 0;
+  line-height: 1.5;
+  letter-spacing: -0.2px;
+}
+
+/* ─── DISCLAIMER ─── */
+.disclaimer {
+  font-size: 11px;
+  color: var(--ink-4);
+  line-height: 1.75;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule-strong);
+}
+.disclaimer strong { font-weight: 500; color: var(--ink-3); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 520px) {
+  .stat-grid-4 { grid-template-columns: 1fr 1fr; }
+  .cover-stats { grid-template-columns: 1fr 1fr; }
+  .do-grid { grid-template-columns: 1fr; }
+  .goal-row { grid-template-columns: 1fr 1fr; }
+  .goal-target { grid-column: 2; }
+  .nutrient-row { grid-template-columns: 1fr; gap: 4px; }
+}
+</style>
+</head>
+<body>
+<nav style="position:sticky;top:0;z-index:100;background:#F9F7F2;border-bottom:1px solid rgba(15,14,12,0.08);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:52px;font-family:Jost,sans-serif;">
+<span style="font-family:Playfair Display,serif;font-size:17px;font-weight:400;letter-spacing:-0.3px">90 Day</span>
+<div style="display:flex;gap:4px;">
+<a href="index.html" style="font-size:11px;padding:5px 10px;border-radius:8px;color:#B0AEA8;text-decoration:none;">Tracker</a>
+<a href="report.html" style="font-size:11px;padding:5px 10px;border-radius:8px;background:#0F0E0C;color:white;text-decoration:none;">Report</a>
+<a href="recovery.html" style="font-size:11px;padding:5px 10px;border-radius:8px;color:#B0AEA8;text-decoration:none;">Recovery</a>
+</div>
+</nav>
+<div class="wrap">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-eyebrow">Confidential Health Assessment &nbsp;·&nbsp; April 2026 &nbsp;·&nbsp; Version 3.0</div>
+    <div class="cover-title">Personal<br>Body &amp; Health<br><em>Report</em></div>
+    <div class="cover-sub">Prepared for: Jihan R. &nbsp;·&nbsp; 25 years &nbsp;·&nbsp; Male &nbsp;·&nbsp; Fasted morning measurements</div>
+    <div class="cover-stats">
+      <div class="cover-stat">
+        <div class="cover-stat-num">22.4%</div>
+        <div class="cover-stat-lbl">Body fat</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-num">43.5<span style="font-size:14px;color:#999">kg</span></div>
+        <div class="cover-stat-lbl">Lean mass</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-num">0.898</div>
+        <div class="cover-stat-lbl">Waist / Hip</div>
+      </div>
+      <div class="cover-stat">
+        <div class="cover-stat-num">1,879</div>
+        <div class="cover-stat-lbl">TDEE kcal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ul class="toc-list">
+      <li class="toc-item"><span class="toc-num">01</span><span>Body Composition &amp; Core Metrics</span></li>
+      <li class="toc-item"><span class="toc-num">02</span><span>Health Risk Assessment</span></li>
+      <li class="toc-item"><span class="toc-num">03</span><span>Complete Daily Diet Protocol</span></li>
+      <li class="toc-item"><span class="toc-num">04</span><span>Muscle Protein Synthesis &amp; Recovery</span></li>
+      <li class="toc-item"><span class="toc-num">05</span><span>Lung &amp; Respiratory Nutrition</span></li>
+      <li class="toc-item"><span class="toc-num">06</span><span>Psoriasis Management Protocol</span></li>
+      <li class="toc-item"><span class="toc-num">07</span><span>Smoking &amp; THC — Clinical Impact</span></li>
+      <li class="toc-item"><span class="toc-num">08</span><span>Do &amp; Don't — Master Reference</span></li>
+      <li class="toc-item"><span class="toc-num">09</span><span>90-Day Transformation Targets</span></li>
+    </ul>
+  </div>
+
+  <!-- 01 BODY COMPOSITION -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Body Composition &amp; <em>Core Metrics</em></h2>
+    </div>
+
+    <div class="stat-grid-2">
+      <div class="stat dark">
+        <div class="stat-n">22.4<span class="stat-u">%</span></div>
+        <div class="stat-l">Body fat — US Navy method</div>
+        <span class="badge badge-dark">Upper-average range</span>
+      </div>
+      <div class="stat">
+        <div class="stat-n">0.898</div>
+        <div class="stat-l">Waist-to-hip ratio</div>
+        <span class="badge badge-amber">Borderline — WHO threshold 0.90</span>
+      </div>
+    </div>
+    <div class="stat-grid-4">
+      <div class="stat">
+        <div class="stat-n">43.5<span class="stat-u" style="font-size:14px">kg</span></div>
+        <div class="stat-l">Lean mass</div>
+        <span class="badge badge-amber">Target: 47kg</span>
+      </div>
+      <div class="stat">
+        <div class="stat-n">12.6<span class="stat-u" style="font-size:14px">kg</span></div>
+        <div class="stat-l">Fat mass</div>
+        <span class="badge badge-amber">Target: 9.5kg</span>
+      </div>
+      <div class="stat">
+        <div class="stat-n">1,503</div>
+        <div class="stat-l">BMR kcal/day</div>
+        <span class="badge badge-neutral">At complete rest</span>
+      </div>
+      <div class="stat">
+        <div class="stat-n">1,879</div>
+        <div class="stat-l">TDEE kcal/day</div>
+        <span class="badge badge-neutral">Current activity</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:10px">Body composition breakdown</p>
+      <div class="comp-bar">
+        <div class="comp-fat" style="width:22.4%"></div>
+        <div class="comp-muscle" style="width:64.2%"></div>
+        <div class="comp-other" style="width:13.4%"></div>
+      </div>
+      <div class="comp-legend">
+        <span><span class="cdot" style="background:#C8882A"></span>Fat — 12.6kg (22.4%)</span>
+        <span><span class="cdot" style="background:#2D7A50"></span>Muscle &amp; organs — 36.0kg (64.2%)</span>
+        <span><span class="cdot" style="background:#B0AEA8"></span>Bone &amp; water — 7.5kg (13.4%)</span>
+      </div>
+
+      <div class="spectrum-wrap" style="margin-top:2rem">
+        <div class="spectrum-bar"></div>
+        <div class="spectrum-pointer" style="left:55%">
+          <div class="pointer-lbl">You — 22.4%</div>
+          <div class="pointer-pin"></div>
+        </div>
+        <div class="spectrum-zones">
+          <div class="spectrum-zone" style="width:10%">Essential<br>2–5%</div>
+          <div class="spectrum-zone" style="width:20%">Athletic<br>6–13%</div>
+          <div class="spectrum-zone" style="width:15%">Fit<br>14–17%</div>
+          <div class="spectrum-zone" style="width:22%">Average<br>18–24%</div>
+          <div class="spectrum-zone" style="width:33%">Obese<br>25%+</div>
+        </div>
+      </div>
+
+      <p style="font-size:13px;color:var(--ink-3);line-height:1.75;margin-top:1.25rem">
+        At 22.4% body fat you sit in the upper quarter of the average male range — 2.4% from the obese classification and 8.4% from the athletic range. The profile is classic skinny-fat: low total body weight (56.1kg), low lean mass (43.5kg), and fat disproportionately concentrated in the abdominal region as evidenced by the waist-to-hip ratio of 0.898. A well-conditioned male at 170cm carries 47–52kg of lean mass. Your current deficit is 3.5–8.5kg. Recomposition — building muscle simultaneously with fat loss — is the correct strategy and is achievable at 25 with the right nutritional and training inputs.
+      </p>
+    </div>
+
+    <div class="card">
+      <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:12px">Measurement baseline — fasted morning</p>
+      <table class="data-table">
+        <thead><tr><th>Measurement</th><th>Value</th><th>Reference</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="td-label">Weight</td><td class="td-strong">56.1 kg</td><td>Healthy: 53–79kg at 170cm</td><td><span class="delta-pos">Normal</span></td></tr>
+          <tr><td class="td-label">Height</td><td class="td-strong">170 cm</td><td>—</td><td><span class="delta-neu">—</span></td></tr>
+          <tr><td class="td-label">BMI</td><td class="td-strong">19.4</td><td>Normal: 18.5–24.9</td><td><span class="delta-pos">Normal</span></td></tr>
+          <tr><td class="td-label">Waist</td><td class="td-strong">78.1 cm</td><td>Low risk: &lt;80cm (male)</td><td><span class="delta-pos">Low risk</span></td></tr>
+          <tr><td class="td-label">Hips</td><td class="td-strong">87.0 cm</td><td>—</td><td><span class="delta-neu">—</span></td></tr>
+          <tr><td class="td-label">Neck</td><td class="td-strong">33.5 cm</td><td>—</td><td><span class="delta-neu">—</span></td></tr>
+          <tr><td class="td-label">Chest</td><td class="td-strong">85.0 cm</td><td>—</td><td><span class="delta-neu">—</span></td></tr>
+          <tr><td class="td-label">Waist-to-Hip</td><td class="td-strong">0.898</td><td>Low risk: &lt;0.90 (male)</td><td><span class="delta-neg">Borderline</span></td></tr>
+          <tr><td class="td-label">Body Fat %</td><td class="td-strong">22.4%</td><td>Fit: 14–17% / Athletic: 6–13%</td><td><span class="delta-neg">Above fit range</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 02 HEALTH RISKS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Health Risk <em>Assessment</em></h2>
+    </div>
+
+    <div class="card">
+      <div class="risk-list">
+        <div class="risk-item">
+          <div class="risk-indicator"><div class="risk-dot dot-critical"></div><span class="risk-severity">Critical</span></div>
+          <div class="risk-content">
+            <div class="risk-title">Daily combustion smoking — tobacco + THC, 3–5 sessions</div>
+            <div class="risk-body">Combustion smoking is the single highest-impact negative health variable in your profile, affecting seven simultaneous biological systems. Nicotine from tobacco chronically elevates serum cortisol by 25–50%, directly driving visceral fat accumulation around the abdomen. Carbon monoxide from combustion reduces haemoglobin oxygen-carrying capacity, impairing both aerobic performance and cellular nutrient delivery. Tobacco suppresses muscle protein synthesis (MPS) by inhibiting mTORC1 pathway signalling — the primary cellular mechanism through which muscle is built. Daily THC via combustion disrupts slow-wave and REM sleep architecture, blunting the growth hormone pulse that occurs in the first 90 minutes of deep sleep. Combined, these two substances operating at 3–5 daily sessions ensure your recovery, body composition progress, and psoriasis management are all running at significantly below optimal capacity. This is the highest-priority intervention in this entire report.</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-indicator"><div class="risk-dot dot-critical"></div><span class="risk-severity">Critical</span></div>
+          <div class="risk-content">
+            <div class="risk-title">Sleep timing disorder — sleep 5am, wake 10–11am</div>
+            <div class="risk-body">Circadian misalignment is not simply a lifestyle inconvenience — it has measurable physiological consequences. Growth hormone, which is essential for muscle repair and fat metabolism, is primarily secreted in the first sleep cycle before midnight. Sleeping at 5am guarantees this window is missed entirely. Cortisol follows a diurnal rhythm that peaks naturally between 6–8am regardless of when you sleep — waking at 10–11am means your cortisol spike occurs while you are still asleep or just waking, creating a physiological state of elevated stress without the corresponding alertness and food intake needed to manage it. This elevates catabolic activity (muscle breakdown) during your most vulnerable period. Sleep timing misalignment is also a confirmed independent trigger for psoriasis flares and reduces insulin sensitivity by up to 30% in chronic cases.</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-indicator"><div class="risk-dot dot-high"></div><span class="risk-severity">High</span></div>
+          <div class="risk-content">
+            <div class="risk-title">Visceral fat pattern — WHR 0.898, abdominal distribution</div>
+            <div class="risk-body">Your waist-to-hip ratio of 0.898 places you 0.002 below the WHO high-risk threshold of 0.90. Despite being technically within range, the abdominal distribution of your body fat indicates a visceral-dominant pattern. Unlike subcutaneous fat (under the skin), visceral fat wraps around internal organs and is metabolically active — it secretes pro-inflammatory cytokines including TNF-α and IL-6, which are direct aggravators of psoriasis and contribute to insulin resistance over time. At 25 this is not yet a clinical metabolic risk, but it is the mechanism behind your current physique dissatisfaction and needs to be addressed before it calcifies as a pattern. The positive news: visceral fat responds more rapidly to diet and exercise intervention than subcutaneous fat does.</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-indicator"><div class="risk-dot dot-high"></div><span class="risk-severity">High</span></div>
+          <div class="risk-content">
+            <div class="risk-title">Psoriasis — autoimmune inflammatory condition</div>
+            <div class="risk-body">Psoriasis is a systemic inflammatory condition, not merely a skin problem. It is driven by T-cell dysregulation and excess TNF-α production. Every lifestyle factor that elevates systemic inflammation — smoking, poor sleep, visceral fat, processed food, chronic stress — directly aggravates the underlying mechanism. You currently have confirmed exposure to the top three lifestyle aggravators simultaneously. This is why dietary and lifestyle management of psoriasis often produces results comparable to topical pharmacological treatment. It also means that every improvement to your lifestyle compounds — reducing smoking reduces systemic inflammation, which reduces psoriasis flares, which reduces the inflammatory load on the body, which improves sleep, which improves cortisol regulation.</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-indicator"><div class="risk-dot dot-moderate"></div><span class="risk-severity">Moderate</span></div>
+          <div class="risk-content">
+            <div class="risk-title">Muscle protein synthesis deficit — lean mass 43.5kg</div>
+            <div class="risk-body">Your lean mass of 43.5kg is 3.5–4kg below the lower bound of optimal for a 25-year-old male at 170cm. Low lean mass reduces your basal metabolic rate, making fat gain easier and fat loss harder. Combined with the MPS suppression from smoking, your body is currently in a state where it would build muscle slowly even with an optimal training stimulus. The nutritional interventions in Section 04 directly target this by providing the raw materials and signalling environment for maximal protein synthesis within your current lifestyle constraints.</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-indicator"><div class="risk-dot dot-moderate"></div><span class="risk-severity">Moderate</span></div>
+          <div class="risk-content">
+            <div class="risk-title">Irregular meal timing — first meal at 3–4pm, eating to 2am</div>
+            <div class="risk-body">Extended morning fasting (waking at 10–11am with no food until 3–4pm) creates a 4–5 hour window of elevated cortisol and low blood glucose, promoting muscle catabolism. Late-night eating concentrated between 11pm and 2am loads the majority of daily calories into the window of lowest insulin sensitivity and highest fat storage propensity. This eating pattern structurally supports the skinny-fat body composition pattern you are trying to reverse. The pattern is also likely THC-appetite-driven, making the substance use and eating habit codependent.</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-indicator"><div class="risk-dot dot-low"></div><span class="risk-severity">Positive</span></div>
+          <div class="risk-content">
+            <div class="risk-title">Age — 25 years, peak hormonal window</div>
+            <div class="risk-body">Testosterone is at or near lifetime peak, growth hormone response to training is at maximum efficiency, and the cellular machinery for muscle protein synthesis is operating at full capacity when not suppressed by external factors. The combination of high anabolic hormone levels and the neuroplasticity to build strong new habits makes 25 the optimal window for exactly this type of transformation. Results that require 6 months at 35 are achievable in 90 days now.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 DIET PROTOCOL -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Complete Daily <em>Diet Protocol</em></h2>
+    </div>
+
+    <div class="pull-quote">Food is not about restriction. It is about giving your body the precise inputs it needs to do the work you are asking of it.</div>
+
+    <div class="card-tinted-blue" style="margin-bottom:16px">
+      <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px">Daily macro targets — recomposition at 56.1kg</p>
+      <div class="stat-grid-4" style="margin-bottom:0">
+        <div style="text-align:center;padding:10px;background:white;border-radius:10px;border:1px solid rgba(26,58,107,0.1)">
+          <div style="font-family:'Playfair Display',serif;font-size:28px;letter-spacing:-0.5px">2,050</div>
+          <div style="font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.08em;margin-top:3px">Calories</div>
+        </div>
+        <div style="text-align:center;padding:10px;background:white;border-radius:10px;border:1px solid rgba(26,58,107,0.1)">
+          <div style="font-family:'Playfair Display',serif;font-size:28px;letter-spacing:-0.5px;color:var(--green)">140g</div>
+          <div style="font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.08em;margin-top:3px">Protein</div>
+        </div>
+        <div style="text-align:center;padding:10px;background:white;border-radius:10px;border:1px solid rgba(26,58,107,0.1)">
+          <div style="font-family:'Playfair Display',serif;font-size:28px;letter-spacing:-0.5px;color:var(--blue)">200g</div>
+          <div style="font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.08em;margin-top:3px">Carbs</div>
+        </div>
+        <div style="text-align:center;padding:10px;background:white;border-radius:10px;border:1px solid rgba(26,58,107,0.1)">
+          <div style="font-family:'Playfair Display',serif;font-size:28px;letter-spacing:-0.5px;color:var(--amber)">60g</div>
+          <div style="font-size:10px;color:var(--ink-4);text-transform:uppercase;letter-spacing:0.08em;margin-top:3px">Fat</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:13px;color:var(--ink-3);margin-bottom:1.25rem;line-height:1.7">Your meal timing is structured around your actual wake schedule (10–11am), not an idealised one. The principle is protein distribution — 35–40g per meal across 3–4 eating windows to maximise muscle protein synthesis, which requires adequate leucine threshold (~2.5g per meal) to trigger the mTOR pathway. Eating all protein in one sitting does not produce the same anabolic effect as spreading it across meals.</p>
+
+    <div class="meal-plan">
+      <div class="meal-block">
+        <div class="meal-header">
+          <span class="meal-time">Meal 1 — 11:30am–12:30pm &nbsp; (within 90 min of waking)</span>
+          <span class="meal-macro-summary">~550 kcal · ~50g P · ~55g C · ~18g F</span>
+        </div>
+        <div class="meal-row"><span class="meal-food">Whole eggs (3) + egg whites (2)</span><span class="meal-macros"><span class="mp">P 25g</span><span class="mc">C 1g</span><span class="mf">F 15g</span></span><span class="meal-portion">—</span></div>
+        <div class="meal-row"><span class="meal-food">Oats, dry</span><span class="meal-macros"><span class="mp">P 6g</span><span class="mc">C 35g</span><span class="mf">F 3g</span></span><span class="meal-portion">60g / ½ cup</span></div>
+        <div class="meal-row"><span class="meal-food">Greek yogurt, full fat</span><span class="meal-macros"><span class="mp">P 17g</span><span class="mc">C 6g</span><span class="mf">F 5g</span></span><span class="meal-portion">150g</span></div>
+        <div class="meal-row"><span class="meal-food">Banana</span><span class="meal-macros"><span class="mp">P 1g</span><span class="mc">C 23g</span><span class="mf">F 0g</span></span><span class="meal-portion">1 medium</span></div>
+        <div class="meal-row"><span class="meal-food" style="color:var(--green);font-size:12px">+ 1 tbsp turmeric in oats · olive oil for eggs · black coffee</span><span class="meal-macros"></span><span class="meal-portion">Anti-inflam.</span></div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-header">
+          <span class="meal-time">Snack — 3:00–4:00pm</span>
+          <span class="meal-macro-summary">~250 kcal · ~30g P · ~15g C · ~8g F</span>
+        </div>
+        <div class="meal-row"><span class="meal-food">Cottage cheese or Greek yogurt</span><span class="meal-macros"><span class="mp">P 20g</span><span class="mc">C 6g</span><span class="mf">F 4g</span></span><span class="meal-portion">200g</span></div>
+        <div class="meal-row"><span class="meal-food">Mixed nuts (walnuts, almonds)</span><span class="meal-macros"><span class="mp">P 5g</span><span class="mc">C 6g</span><span class="mf">F 15g</span></span><span class="meal-portion">30g / small handful</span></div>
+        <div class="meal-row"><span class="meal-food">Apple or berries</span><span class="meal-macros"><span class="mp">P 0g</span><span class="mc">C 15g</span><span class="mf">F 0g</span></span><span class="meal-portion">1 medium / 100g</span></div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-header">
+          <span class="meal-time">Meal 2 — 7:00–8:30pm &nbsp; (main meal, post-training if applicable)</span>
+          <span class="meal-macro-summary">~650 kcal · ~50g P · ~65g C · ~18g F</span>
+        </div>
+        <div class="meal-row"><span class="meal-food">Chicken breast or salmon fillet</span><span class="meal-macros"><span class="mp">P 40–50g</span><span class="mc">C 0g</span><span class="mf">F 3–12g</span></span><span class="meal-portion">180–200g</span></div>
+        <div class="meal-row"><span class="meal-food">White or brown rice, cooked</span><span class="meal-macros"><span class="mp">P 4g</span><span class="mc">C 45g</span><span class="mf">F 0g</span></span><span class="meal-portion">200g cooked</span></div>
+        <div class="meal-row"><span class="meal-food">Broccoli, spinach, or mixed veg</span><span class="meal-macros"><span class="mp">P 4g</span><span class="mc">C 10g</span><span class="mf">F 0g</span></span><span class="meal-portion">150g</span></div>
+        <div class="meal-row"><span class="meal-food">Olive oil (cooking)</span><span class="meal-macros"><span class="mp">P 0g</span><span class="mc">C 0g</span><span class="mf">F 14g</span></span><span class="meal-portion">1 tbsp</span></div>
+        <div class="meal-row"><span class="meal-food" style="color:var(--green);font-size:12px">Use salmon 3x/week instead of chicken — omega-3s for lung + psoriasis</span><span class="meal-macros"></span><span class="meal-portion">Priority</span></div>
+      </div>
+
+      <div class="meal-block">
+        <div class="meal-header">
+          <span class="meal-time">Evening — before 10:30pm (hard cut — nothing after this)</span>
+          <span class="meal-macro-summary">~200 kcal · ~20g P · ~10g C · ~5g F</span>
+        </div>
+        <div class="meal-row"><span class="meal-food">Cottage cheese</span><span class="meal-macros"><span class="mp">P 20g</span><span class="mc">C 6g</span><span class="mf">F 4g</span></span><span class="meal-portion">180g</span></div>
+        <div class="meal-row"><span class="meal-food">Casein protein (milk or powder)</span><span class="meal-macros"><span class="mp">P 24g</span><span class="mc">C 3g</span><span class="mf">F 1g</span></span><span class="meal-portion">Alternative</span></div>
+        <div class="meal-row"><span class="meal-food" style="color:var(--ink-3);font-style:italic;font-size:12px">Casein is slow-digesting — feeds muscle repair through sleep. This is not optional if you want overnight recovery.</span><span class="meal-macros"></span><span class="meal-portion"></span></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:4px">
+      <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:14px">Priority food list — what to keep stocked</p>
+      <table class="data-table">
+        <thead><tr><th>Food</th><th>Why it matters for you</th><th>Target frequency</th></tr></thead>
+        <tbody>
+          <tr><td class="td-strong">Salmon / mackerel / sardines</td><td style="font-size:12px;color:var(--ink-3)">Omega-3 EPA/DHA — lung inflammation, psoriasis, MPS support</td><td style="font-size:12px">3x per week</td></tr>
+          <tr><td class="td-strong">Eggs (whole)</td><td style="font-size:12px;color:var(--ink-3)">Complete protein, choline for liver, leucine for MPS trigger</td><td style="font-size:12px">Daily</td></tr>
+          <tr><td class="td-strong">Greek yogurt / cottage cheese</td><td style="font-size:12px;color:var(--ink-3)">Casein protein — overnight recovery, gut health</td><td style="font-size:12px">Daily</td></tr>
+          <tr><td class="td-strong">Chicken breast</td><td style="font-size:12px;color:var(--ink-3)">Lean complete protein, versatile, low-fat</td><td style="font-size:12px">4–5x week</td></tr>
+          <tr><td class="td-strong">Walnuts</td><td style="font-size:12px;color:var(--ink-3)">ALA omega-3, antioxidants, anti-inflammatory for lungs</td><td style="font-size:12px">Daily snack</td></tr>
+          <tr><td class="td-strong">Oats</td><td style="font-size:12px;color:var(--ink-3)">Beta-glucan for lung health, slow carb, satiety</td><td style="font-size:12px">Daily breakfast</td></tr>
+          <tr><td class="td-strong">Broccoli / spinach / kale</td><td style="font-size:12px;color:var(--ink-3)">Sulforaphane, Vitamin C, K — lung detox, anti-inflammatory</td><td style="font-size:12px">Daily</td></tr>
+          <tr><td class="td-strong">Berries (blueberry, blackberry)</td><td style="font-size:12px;color:var(--ink-3)">Anthocyanins — cellular antioxidant, psoriasis + lung benefit</td><td style="font-size:12px">Daily</td></tr>
+          <tr><td class="td-strong">Olive oil (extra virgin)</td><td style="font-size:12px;color:var(--ink-3)">Oleocanthal — anti-inflammatory comparable to low-dose ibuprofen</td><td style="font-size:12px">Daily cooking</td></tr>
+          <tr><td class="td-strong">Turmeric + black pepper</td><td style="font-size:12px;color:var(--ink-3)">Curcumin bioavailability 2000% higher with piperine — systemic anti-inflam.</td><td style="font-size:12px">Daily</td></tr>
+          <tr><td class="td-strong">Ginger</td><td style="font-size:12px;color:var(--ink-3)">Gingerols reduce TNF-α — direct psoriasis + lung inflammation pathway</td><td style="font-size:12px">4x week</td></tr>
+          <tr><td class="td-strong">Sweet potato</td><td style="font-size:12px;color:var(--ink-3)">Beta-carotene → Vitamin A for skin and lung epithelial repair</td><td style="font-size:12px">3x week</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card-tinted-red" style="margin-top:4px">
+      <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-bottom:12px">Foods to minimise — your specific list</p>
+      <table class="data-table">
+        <thead><tr><th>Food / drink</th><th>Why it works against you specifically</th></tr></thead>
+        <tbody>
+          <tr><td class="td-strong">Sugary drinks — juice, soda, sweetened coffee</td><td style="font-size:12px;color:var(--ink-3)">150–350 kcal with zero protein, zero satiety, spikes insulin and promotes visceral fat storage. This is silent calorie poison.</td></tr>
+          <tr><td class="td-strong">Processed / packaged snacks</td><td style="font-size:12px;color:var(--ink-3)">High omega-6 oils (seed oils) directly compete with omega-3s for anti-inflammatory pathways — worsens psoriasis and lung inflammation.</td></tr>
+          <tr><td class="td-strong">Red meat &gt;2x week</td><td style="font-size:12px;color:var(--ink-3)">Arachidonic acid is pro-inflammatory, aggravates psoriasis. Fine in moderation — not as a staple.</td></tr>
+          <tr><td class="td-strong">Alcohol</td><td style="font-size:12px;color:var(--ink-3)">Suppresses MPS for 24–48 hours post-consumption, documented psoriasis trigger, disrupts sleep architecture, promotes fat storage.</td></tr>
+          <tr><td class="td-strong">Deep-fried food</td><td style="font-size:12px;color:var(--ink-3)">Oxidised oils generate advanced glycation end-products — accelerate skin aging, systemic inflammation, psoriasis severity.</td></tr>
+          <tr><td class="td-strong">Late-night carb-heavy eating (post-10:30pm)</td><td style="font-size:12px;color:var(--ink-3)">Insulin sensitivity drops 30–50% after 10pm. Carbs consumed here are preferentially stored as fat, not glycogen. This is the THC appetite driving your current body composition pattern.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 04 MUSCLE PROTEIN SYNTHESIS + RECOVERY -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Muscle Protein Synthesis <em>&amp; Recovery</em></h2>
+    </div>
+
+    <div class="card">
+      <p style="font-size:13px;color:var(--ink-3);line-height:1.75;margin-bottom:1.25rem">Muscle protein synthesis (MPS) is the cellular process by which your body repairs and builds muscle fibres following training stimulus. It is driven by three inputs: mechanical stress (training), amino acid availability (diet), and anabolic hormonal signalling (sleep + hormones). You currently have suppression operating on all three channels via smoking, poor sleep, and low protein intake. The protocol below is designed to maximise MPS output within your current constraints while progressively removing the suppressors.</p>
+
+      <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:14px">Key nutrients for muscle protein synthesis — your specific stack</p>
+      <div class="nutrient-row" style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-4);padding-top:0">
+        <span>Nutrient</span><span>Role in MPS</span><span>Best food sources</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">Leucine</span>
+        <span class="nutrient-role">Primary trigger of mTORC1 — the master switch for MPS. Minimum 2.5g per meal required to activate the pathway. Without sufficient leucine, eating protein has diminished anabolic effect.</span>
+        <span class="nutrient-source">Eggs (0.5g/egg), chicken breast (2.4g/100g), Greek yogurt, cottage cheese, whey protein</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">Creatine</span>
+        <span class="nutrient-role">Increases phosphocreatine stores for ATP regeneration during explosive efforts. Enhances training volume capacity by 10–20%, directly increasing the mechanical stimulus for MPS. Most studied performance supplement in existence.</span>
+        <span class="nutrient-source">Red meat (small amounts), supplementation: 3–5g/day creatine monohydrate is the single most cost-effective supplement available</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">Zinc</span>
+        <span class="nutrient-role">Essential cofactor for testosterone production and growth hormone signalling. Smoking depletes zinc levels — you are likely deficient. Deficiency directly suppresses MPS and immune function.</span>
+        <span class="nutrient-source">Pumpkin seeds, beef, chickpeas, cashews. Consider 15–25mg zinc supplement given smoking-induced depletion.</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">Vitamin D3</span>
+        <span class="nutrient-role">Regulates over 900 genes including those governing muscle function and testosterone production. Deficiency is associated with reduced muscle strength and impaired satellite cell activation (muscle stem cells). Critical for psoriasis management.</span>
+        <span class="nutrient-source">Tbilisi sun exposure (15–20 min daily), fatty fish, egg yolks. Supplement 2,000–4,000 IU/day especially before your sun exposure in Tbilisi increases.</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">Magnesium</span>
+        <span class="nutrient-role">Required for over 300 enzymatic reactions including protein synthesis. Supports deep sleep (slow-wave) — the phase where growth hormone is secreted. Smoking and stress both deplete magnesium. Low levels correlate with poor recovery and muscle cramping.</span>
+        <span class="nutrient-source">Dark leafy greens (spinach, kale), pumpkin seeds, almonds. Supplement: 300–400mg magnesium glycinate before sleep — improves sleep quality directly.</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">Vitamin C</span>
+        <span class="nutrient-role">Essential for collagen synthesis — the protein matrix that gives muscle, tendon, and connective tissue structural integrity. Smoking destroys Vitamin C at a rate of approximately 35mg per cigarette. You are almost certainly chronically deficient. Deficiency slows recovery and increases injury risk.</span>
+        <span class="nutrient-source">Bell peppers (highest source — 200mg/100g), kiwi, broccoli, strawberries. Supplement 500–1,000mg/day given smoking-induced depletion.</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">Omega-3 (EPA/DHA)</span>
+        <span class="nutrient-role">Reduces muscle inflammation post-training, accelerating recovery between sessions. Directly enhances MPS by sensitising muscle cells to amino acid uptake. Anti-inflammatory for psoriasis and lung tissue simultaneously.</span>
+        <span class="nutrient-source">Salmon (2g EPA/DHA per 100g), mackerel, sardines. Supplement: 2–3g fish oil/day if not eating oily fish 3x/week.</span>
+      </div>
+      <div class="nutrient-row" style="border-bottom:none">
+        <span class="nutrient-name">B-Complex (B6, B12, Folate)</span>
+        <span class="nutrient-role">B6 and B12 are essential for amino acid metabolism — they process the protein you eat into usable building blocks. Smoking depletes B12. Folate is critical for cellular repair including muscle satellite cell proliferation.</span>
+        <span class="nutrient-source">Chicken, eggs, leafy greens, legumes. A B-complex supplement is warranted given smoking-induced depletion.</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:1.25rem">Recovery timeline — what happens after each session</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">0–30 minutes post-training</div>
+          <div class="timeline-title">Anabolic window — protein priority</div>
+          <div class="timeline-body">MPS is maximally elevated. Consume 30–40g fast-digesting protein within 45 minutes — whey protein shake, Greek yogurt, or eggs. Include 30–50g carbohydrates to replenish glycogen and spike insulin (which is anabolic post-training). This is your most impactful nutritional decision of the day.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">30 min – 4 hours post-training</div>
+          <div class="timeline-title">Acute inflammation phase — necessary but manageable</div>
+          <div class="timeline-body">Microscopic muscle fibre tears trigger localised inflammation — this is normal and necessary for adaptation. Do not take NSAIDs (ibuprofen) in this window as they blunt the inflammatory signal required for muscle repair. Hydrate, rest, eat. Smoking in this window is particularly damaging as it impairs the vascular response needed for nutrient delivery to repairing tissue.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">4–24 hours — sleep window</div>
+          <div class="timeline-title">Growth hormone pulse — the real building phase</div>
+          <div class="timeline-body">The majority of muscle repair occurs during sleep, specifically during slow-wave (deep) sleep when growth hormone is secreted in its largest daily pulse. Consuming casein protein or cottage cheese before sleep provides a sustained amino acid supply through this repair window — 6–8 hour slow digestion. Magnesium glycinate (300mg) taken 45 minutes before sleep deepens slow-wave sleep measurably. THC disrupts this phase — this is why recovery is blunted even when sleep duration is adequate.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">24–72 hours — remodelling phase</div>
+          <div class="timeline-title">Muscle supercompensation — where growth actually happens</div>
+          <div class="timeline-body">Protein synthesis remains elevated for 24–72 hours after a training session. This is why consistent protein intake across all days — not just training days — matters. During this window the muscle is being remodelled slightly thicker and stronger than before the session. Soreness indicates active repair. Continue hitting protein targets. Do not train the same muscle group while significant soreness persists — you will be training already-depleted tissue.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background:var(--green)"></div>
+          <div class="timeline-time">48–72 hours — full recovery</div>
+          <div class="timeline-title">Supercompensation complete — ready for next stimulus</div>
+          <div class="timeline-body">The muscle group is now marginally stronger than before the session. This is the window to train it again. Training before this point (overtraining) produces diminishing returns. Training after this point (undertraining) means the supercompensation plateau is lost. Your 3-day-per-week schedule is timed correctly for this cycle at your current recovery capacity.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-tinted-green">
+      <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:10px">Recommended supplements — priority order</p>
+      <table class="data-table">
+        <thead><tr><th>Supplement</th><th>Dose</th><th>Timing</th><th>Priority</th></tr></thead>
+        <tbody>
+          <tr><td class="td-strong">Creatine monohydrate</td><td>5g/day</td><td>Any time, consistency matters</td><td><span class="delta-pos">Highest</span></td></tr>
+          <tr><td class="td-strong">Vitamin C</td><td>500–1,000mg/day</td><td>With breakfast</td><td><span class="delta-pos">Highest — smoker depletion</span></td></tr>
+          <tr><td class="td-strong">Zinc (bisglycinate)</td><td>15–25mg/day</td><td>With food, not on empty stomach</td><td><span class="delta-pos">Highest — smoker depletion</span></td></tr>
+          <tr><td class="td-strong">Magnesium glycinate</td><td>300–400mg/day</td><td>45 min before sleep</td><td><span class="delta-pos">High — sleep + recovery</span></td></tr>
+          <tr><td class="td-strong">Vitamin D3 + K2</td><td>2,000–4,000 IU D3 / 100mcg K2</td><td>With fatty meal</td><td><span class="delta-pos">High — psoriasis + MPS</span></td></tr>
+          <tr><td class="td-strong">Omega-3 fish oil</td><td>2–3g EPA+DHA/day</td><td>With meals</td><td><span class="delta-neu">High if not eating oily fish</span></td></tr>
+          <tr><td class="td-strong">B-complex</td><td>Standard dose</td><td>Morning with food</td><td><span class="delta-neu">Moderate — smoker support</span></td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--ink-3);margin-top:10px;font-style:italic">Note: Creatine, Vitamin C, Zinc, and Magnesium are the four highest-priority items. They address your specific deficiencies created by smoking and will produce measurable improvements in recovery, training performance, and skin health within 3–4 weeks.</p>
+    </div>
+  </div>
+
+  <!-- 05 LUNG NUTRITION -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Lung &amp; Respiratory <em>Nutrition</em></h2>
+    </div>
+
+    <div class="card-dark">
+      <p style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400;font-style:italic;color:rgba(249,247,242,0.85);line-height:1.5;margin-bottom:1rem">Your lungs are under active oxidative stress from daily combustion. Nutrition cannot undo the structural damage of smoking — but it can significantly reduce the rate of damage, accelerate cellular repair, and improve functional respiratory capacity.</p>
+      <p style="font-size:13px;color:rgba(249,247,242,0.55);line-height:1.7">Combustion generates free radicals and reactive oxygen species (ROS) that damage lung epithelial cells and inflame bronchial tissue. The body's defence is the antioxidant system — Vitamin C, E, glutathione, and beta-carotene. Smoking depletes all of these simultaneously. The strategy is to aggressively replenish them through diet and targeted supplementation while reducing the oxidative load by reducing smoking frequency.</p>
+    </div>
+
+    <div class="card">
+      <p style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-4);margin-bottom:14px">Lung-specific nutritional protocol</p>
+      <div class="nutrient-row" style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-4);padding-top:0">
+        <span>Nutrient</span><span>Mechanism for lung health</span><span>Sources + dosing</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">Vitamin C — critical</span>
+        <span class="nutrient-role">The primary water-soluble antioxidant protecting lung epithelial cells. Smoking depletes ~35mg per cigarette — at 3–5 sessions daily (even with tobacco + THC) your baseline levels are chronically depleted. Vitamin C is also required to regenerate Vitamin E after it neutralises a free radical. Without adequate C, the entire antioxidant cascade fails.</span>
+        <span class="nutrient-source">Bell peppers (200mg/100g), kiwi (93mg), broccoli (89mg), strawberries. Supplement: 500–1,000mg daily — divided doses absorb better than single large dose.</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">Vitamin E</span>
+        <span class="nutrient-role">Primary fat-soluble antioxidant protecting cell membranes in lung tissue from lipid peroxidation — a key mechanism of smoking-induced lung damage. Works synergistically with Vitamin C.</span>
+        <span class="nutrient-source">Almonds (26mg/100g), sunflower seeds, olive oil, avocado. Dietary intake usually sufficient if eating nuts and olive oil daily — no supplement needed unless diet is poor.</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">N-Acetyl Cysteine (NAC)</span>
+        <span class="nutrient-role">Direct precursor to glutathione — the body's master antioxidant. NAC is used clinically for respiratory conditions and in smoking-cessation protocols precisely because it replenishes glutathione depleted by combustion. Also has mucolytic properties — it thins bronchial mucus, improving airway clearance. One of the most evidence-backed supplements for smokers specifically.</span>
+        <span class="nutrient-source">Supplement: 600mg NAC, 1–2x daily. Food source: eggs, chicken (cysteine precursor). NAC is not found in meaningful amounts in food — supplementation is necessary.</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">Omega-3 EPA/DHA</span>
+        <span class="nutrient-role">Reduce bronchial inflammation directly. EPA converts to anti-inflammatory prostaglandins (PGE3) that counter the pro-inflammatory prostaglandins produced by smoking-induced arachidonic acid metabolism. Studies show omega-3 supplementation in smokers measurably reduces markers of pulmonary inflammation (IL-6, TNF-α) within 8–12 weeks.</span>
+        <span class="nutrient-source">Salmon 3x/week provides adequate EPA/DHA. On non-fish days: 2g fish oil supplement. Walnuts provide ALA (plant omega-3) — lower conversion rate but still beneficial.</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">Beta-carotene / Vitamin A</span>
+        <span class="nutrient-role">Beta-carotene is a precursor to Vitamin A, which is essential for maintaining the epithelial cell integrity of the lung lining — the first physical barrier against inhaled toxins. Vitamin A regulates mucus production in airways. Deficiency (common in smokers) leads to increased susceptibility to respiratory infection.</span>
+        <span class="nutrient-source">Sweet potato (one medium = 400% RDA beta-carotene), carrots, spinach, kale. Do not supplement pre-formed Vitamin A (retinol) in high doses — use beta-carotene from food only.</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">Sulforaphane</span>
+        <span class="nutrient-role">A compound found specifically in cruciferous vegetables that activates the Nrf2 pathway — a master cellular defence system that upregulates the body's own antioxidant and detoxification enzymes. Shown in research to activate lung detoxification pathways in smokers and reduce carcinogen activation.</span>
+        <span class="nutrient-source">Broccoli (highest source, especially raw or lightly steamed), Brussels sprouts, cabbage. Eat broccoli 4–5x per week. Chopping and letting it sit 5 minutes before cooking increases sulforaphane content significantly.</span>
+      </div>
+      <div class="nutrient-row">
+        <span class="nutrient-name">Quercetin</span>
+        <span class="nutrient-role">A flavonoid with documented bronchodilatory and anti-inflammatory properties. Reduces histamine response and mast cell activation in airways. Also synergistic with Vitamin C — they regenerate each other in the antioxidant cycle.</span>
+        <span class="nutrient-source">Apples (especially skin), red onion, capers, berries. Eat an apple daily with skin on. Supplement: 500mg quercetin if diet is low in these foods.</span>
+      </div>
+      <div class="nutrient-row" style="border-bottom:none">
+        <span class="nutrient-name">Magnesium</span>
+        <span class="nutrient-role">Bronchial smooth muscle uses magnesium for relaxation — deficiency contributes to airway hyperreactivity and exercise-induced bronchoconstriction. IV magnesium is used in clinical asthma management. Oral supplementation supports baseline airway function and reduces exercise breathlessness.</span>
+        <span class="nutrient-source">Already listed in Section 04 supplement protocol — 300–400mg magnesium glycinate before sleep covers both recovery and respiratory function simultaneously.</span>
+      </div>
+    </div>
+
+    <div class="card-tinted-amber">
+      <p style="font-size:13px;font-weight:500;color:var(--amber);margin-bottom:8px">Lung recovery timeline — what to expect if you reduce smoking</p>
+      <table class="data-table">
+        <thead><tr><th>Timeframe</th><th>What recovers</th></tr></thead>
+        <tbody>
+          <tr><td style="font-size:12px;font-weight:500">20 minutes after last cigarette</td><td style="font-size:12px;color:var(--ink-3)">Heart rate and blood pressure normalise</td></tr>
+          <tr><td style="font-size:12px;font-weight:500">12 hours</td><td style="font-size:12px;color:var(--ink-3)">Carbon monoxide levels in blood normalise — haemoglobin oxygen capacity restored</td></tr>
+          <tr><td style="font-size:12px;font-weight:500">48–72 hours</td><td style="font-size:12px;color:var(--ink-3)">Nicotine fully cleared. Taste and smell improve. Cilia begin re-growing in bronchial lining.</td></tr>
+          <tr><td style="font-size:12px;font-weight:500">2–4 weeks</td><td style="font-size:12px;color:var(--ink-3)">Lung function improves measurably. Exercise tolerance increases. Coughing (if present) peaks then decreases as cilia clear accumulated mucus.</td></tr>
+          <tr><td style="font-size:12px;font-weight:500">1–3 months</td><td style="font-size:12px;color:var(--ink-3)">Circulation significantly improved. Muscle protein synthesis normalises. Training results accelerate noticeably.</td></tr>
+          <tr><td style="font-size:12px;font-weight:500">1 year</td><td style="font-size:12px;color:var(--ink-3)">Coronary heart disease risk halved. Lung function continues to improve.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 06 PSORIASIS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Psoriasis <em>Management Protocol</em></h2>
+    </div>
+
+    <div class="card">
+      <p style="font-size:13px;color:var(--ink-3);line-height:1.75;margin-bottom:1.25rem">Psoriasis is an immune-mediated inflammatory condition driven by dysregulated T-cell activity and overproduction of pro-inflammatory cytokines including TNF-α, IL-17, and IL-23. It is not curable through lifestyle alone — but its severity and flare frequency are directly modulated by the inflammatory load of the body as a whole. Every intervention in this report that reduces systemic inflammation — omega-3s, anti-inflammatory diet, improved sleep, reduced smoking — reduces psoriasis severity as a consequence.</p>
+
+      <div class="risk-list">
+        <div class="risk-item">
+          <div class="risk-indicator"><div class="risk-dot dot-critical"></div></div>
+          <div class="risk-content">
+            <div class="risk-title">Smoking — primary modifiable psoriasis trigger</div>
+            <div class="risk-body">Tobacco smoke directly activates the same immune pathways that drive psoriasis. Nicotine stimulates nicotinic acetylcholine receptors on keratinocytes (skin cells), triggering abnormal proliferation — the defining feature of psoriatic plaques. Smoking is associated with more severe psoriasis, resistance to treatment, and higher rates of psoriatic arthritis development. This is biochemically the most direct intervention available for reducing your psoriasis severity.</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-indicator"><div class="risk-dot dot-high"></div></div>
+          <div class="risk-content">
+            <div class="risk-title">Tbilisi sun — use it therapeutically</div>
+            <div class="risk-body">Narrow-band UVB phototherapy is a first-line medical treatment for psoriasis — Tbilisi's sun provides a natural version of this. 15–20 minutes of direct midday sun on affected skin, building from 10 minutes initially, is clinically equivalent to mild phototherapy. Do this consistently 4–5x per week from May through September. Do not burn — sunburn triggers a Koebner phenomenon (psoriasis appearing at sites of skin trauma). Apply sunscreen to unaffected areas if exposure exceeds 20 minutes.</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-indicator"><div class="risk-dot dot-high"></div></div>
+          <div class="risk-content">
+            <div class="risk-title">Anti-inflammatory diet specifics for psoriasis</div>
+            <div class="risk-body">Omega-3 fatty acids (EPA/DHA from salmon and mackerel) directly reduce the IL-17 and TNF-α signalling that drives psoriatic inflammation. Curcumin from turmeric inhibits NF-κB — a transcription factor that is overactive in psoriasis. Quercetin from apples and onions reduces mast cell degranulation. These are not supplementary additions — they are functional therapeutic agents for your condition.</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-indicator"><div class="risk-dot dot-moderate"></div></div>
+          <div class="risk-content">
+            <div class="risk-title">Post-training skin protocol</div>
+            <div class="risk-body">Sweat is mildly acidic and contains urea, lactic acid, and salts that irritate active psoriatic plaques, particularly in flexural areas. Shower within 20 minutes of finishing every training session using a fragrance-free, sulphate-free body wash at lukewarm temperature. Apply a thick fragrance-free emollient (Cetaphil, Eucerin, or equivalent) within 3 minutes of stepping out — this is the optimal window when the stratum corneum is still hydrated. For active plaques, apply prescribed topical treatment before the emollient layer.</div>
+          </div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-indicator"><div class="risk-dot dot-moderate"></div></div>
+          <div class="risk-content">
+            <div class="risk-title">Stress management — cortisol is a direct trigger</div>
+            <div class="risk-body">Cortisol downregulates regulatory T-cells that normally suppress the aberrant immune response in psoriasis. Chronic cortisol elevation — from poor sleep, smoking, life stress — removes the brake on the immune dysregulation. Every positive sleep, exercise, and dietary change in this protocol reduces cortisol chronically and consequently reduces psoriasis flare frequency. The connection is direct and bidirectional: better lifestyle → lower cortisol → fewer flares → less inflammatory load → better recovery → better training results.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 SMOKING -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2 class="section-title">Smoking &amp; THC — <em>Clinical Impact</em></h2>
+    </div>
+
+    <div class="card-dark">
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;font-style:italic;margin-bottom:1rem;color:rgba(249,247,242,0.9);line-height:1.4">Every system this report is trying to optimise is being actively degraded by daily combustion smoking. This is not moralising — it is the mechanistic reality of what is competing against your goals.</div>
+      <p style="font-size:13px;color:rgba(249,247,242,0.55);line-height:1.8">
+        Muscle building suppressed by 20–30% via mTORC1 inhibition<br>
+        Visceral fat accumulation accelerated via chronic cortisol elevation (+25–50% resting cortisol)<br>
+        Lung oxygen delivery impaired via carbon monoxide-haemoglobin binding<br>
+        Skin repair slowed via collagen synthesis suppression and Vitamin C depletion<br>
+        Sleep quality blunted via THC-driven REM disruption<br>
+        Psoriasis severity elevated via nicotinic receptor keratinocyte activation<br>
+        Antioxidant system depleted: Vitamin C, E, glutathione, zinc, B12 all reduced
+      </p>
+    </div>
+
+    <div class="card-tinted-amber">
+      <p style="font-size:13px;font-weight:500;color:var(--amber);margin-bottom:10px">Practical reduction roadmap — not cold turkey</p>
+      <table class="data-table">
+        <thead><tr><th>Phase</th><th>Target</th><th>Primary intervention</th></tr></thead>
+        <tbody>
+          <tr><td style="font-size:12px;font-weight:500">Days 1–30</td><td style="font-size:12px">Reduce from 3–5 sessions to 2–3 per day</td><td style="font-size:12px;color:var(--ink-3)">Delay first session by 2 hours after waking. Decouple smoking from the daily walk entirely.</td></tr>
+          <tr><td style="font-size:12px;font-weight:500">Days 31–60</td><td style="font-size:12px">Switch THC delivery to vaporiser — eliminate combustion</td><td style="font-size:12px;color:var(--ink-3)">Vaporisation at 170–185°C delivers cannabinoids without the combustion products responsible for most lung and inflammatory damage.</td></tr>
+          <tr><td style="font-size:12px;font-weight:500">Days 61–90</td><td style="font-size:12px">Tobacco: 1 session or zero per day</td><td style="font-size:12px;color:var(--ink-3)">By this point training performance improvement, skin changes, and sleep quality will be measurable enough to be self-reinforcing motivation.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 08 DO / DON'T -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2 class="section-title">Do &amp; Don't — <em>Master Reference</em></h2>
+    </div>
+
+    <div class="do-grid">
+      <div class="do-col do-col-green">
+        <div class="do-header">Do — daily non-negotiables</div>
+        <div class="do-item"><span class="do-arrow">→</span>Eat within 90 minutes of waking — protein first</div>
+        <div class="do-item"><span class="do-arrow">→</span>Hit 140g protein distributed across 3–4 meals</div>
+        <div class="do-item"><span class="do-arrow">→</span>Eat salmon or oily fish 3x per week</div>
+        <div class="do-item"><span class="do-arrow">→</span>Add turmeric + black pepper to at least one meal daily</div>
+        <div class="do-item"><span class="do-arrow">→</span>Drink 2.5–3 litres water before 10pm</div>
+        <div class="do-item"><span class="do-arrow">→</span>Eat broccoli or cruciferous veg 4–5x per week</div>
+        <div class="do-item"><span class="do-arrow">→</span>Take Vitamin C, Zinc, Creatine, Magnesium daily</div>
+        <div class="do-item"><span class="do-arrow">→</span>Apply thick moisturiser within 3 min of showering</div>
+        <div class="do-item"><span class="do-arrow">→</span>Get 15–20 min midday sun on psoriasis patches in Tbilisi</div>
+        <div class="do-item"><span class="do-arrow">→</span>Shower immediately after every training session</div>
+        <div class="do-item"><span class="do-arrow">→</span>Eat casein/cottage cheese before 10:30pm for overnight recovery</div>
+        <div class="do-item"><span class="do-arrow">→</span>Sleep before 2am at least 4 nights per week</div>
+        <div class="do-item"><span class="do-arrow">→</span>Keep the daily 20-min walk — separate from smoking</div>
+      </div>
+      <div class="do-col do-col-red">
+        <div class="do-header">Don't — active saboteurs</div>
+        <div class="do-item"><span class="do-arrow">→</span>Smoke during or within 45 min of training</div>
+        <div class="do-item"><span class="do-arrow">→</span>Eat or drink anything after 10:30pm</div>
+        <div class="do-item"><span class="do-arrow">→</span>Skip breakfast and eat first meal at 3–4pm</div>
+        <div class="do-item"><span class="do-arrow">→</span>Drink sugary drinks — juice, soda, sweetened coffee</div>
+        <div class="do-item"><span class="do-arrow">→</span>Use hot water on psoriasis — lukewarm only</div>
+        <div class="do-item"><span class="do-arrow">→</span>Use fragranced soaps or body washes on skin</div>
+        <div class="do-item"><span class="do-arrow">→</span>Sunburn — apply SPF after 20 minutes of therapeutic exposure</div>
+        <div class="do-item"><span class="do-arrow">→</span>Take ibuprofen within 4 hours post-training — blunts MPS signal</div>
+        <div class="do-item"><span class="do-arrow">→</span>Eat processed seed-oil snacks — they compete with omega-3s</div>
+        <div class="do-item"><span class="do-arrow">→</span>Train a muscle group still significantly sore from previous session</div>
+        <div class="do-item"><span class="do-arrow">→</span>Eat red meat more than twice per week</div>
+        <div class="do-item"><span class="do-arrow">→</span>Drink alcohol — 24–48 hour MPS suppression per session</div>
+        <div class="do-item"><span class="do-arrow">→</span>Stress-eat or eat reactively to THC appetite spike</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 TARGETS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2 class="section-title">90-Day <em>Transformation Targets</em></h2>
+    </div>
+
+    <div class="card">
+      <div class="goal-row" style="font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-4);padding-top:0;padding-bottom:8px">
+        <span>Metric</span><span>Current (fasted baseline)</span><span>Day 90 target</span>
+      </div>
+      <div class="goal-row"><span class="goal-metric">Body fat %</span><span class="goal-current">22.4%</span><span class="goal-target">17–19%</span></div>
+      <div class="goal-row"><span class="goal-metric">Lean mass</span><span class="goal-current">43.5 kg</span><span class="goal-target">46–48 kg</span></div>
+      <div class="goal-row"><span class="goal-metric">Fat mass</span><span class="goal-current">12.6 kg</span><span class="goal-target">9.5–10.5 kg</span></div>
+      <div class="goal-row"><span class="goal-metric">Waist circumference</span><span class="goal-current">78.1 cm</span><span class="goal-target">&lt;74 cm</span></div>
+      <div class="goal-row"><span class="goal-metric">Waist-to-hip ratio</span><span class="goal-current">0.898</span><span class="goal-target">&lt;0.86</span></div>
+      <div class="goal-row"><span class="goal-metric">Daily protein</span><span class="goal-current">Irregular / low</span><span class="goal-target">140g+ consistently</span></div>
+      <div class="goal-row"><span class="goal-metric">Smoking sessions</span><span class="goal-current">3–5/day</span><span class="goal-target">1–2/day, tobacco minimal</span></div>
+      <div class="goal-row"><span class="goal-metric">Sleep onset</span><span class="goal-current">~5am</span><span class="goal-target">Before 2am</span></div>
+      <div class="goal-row"><span class="goal-metric">Psoriasis flares</span><span class="goal-current">Current baseline</span><span class="goal-target">Measurably reduced frequency</span></div>
+      <div class="goal-row"><span class="goal-metric">Training sessions</span><span class="goal-current">0/week</span><span class="goal-target">3x/week consistently</span></div>
+      <div class="goal-row"><span class="goal-metric">Max pushups</span><span class="goal-current">Unknown</span><span class="goal-target">20 clean reps</span></div>
+    </div>
+
+    <div class="card-tinted-green">
+      <p style="font-size:13px;color:var(--ink-2);line-height:1.75">These targets are conservative and achievable within 90 days at 25 years old with the training plan, nutrition protocol, and supplement stack in this report — even without fully eliminating smoking. If smoking is reduced to 1–2 sessions per day before Day 60, all targets become significantly more achievable and the physical changes will be visible and self-reinforcing by Day 45. The compounding effect of multiple simultaneous interventions — sleep timing, protein intake, training, anti-inflammatory diet, smoking reduction — means results accelerate as more inputs are corrected.</p>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Methodology:</strong> Body fat calculated using the US Navy circumference method (±2–3% margin of error vs DEXA). BMR calculated using the Mifflin-St Jeor equation. TDEE based on sedentary activity multiplier (1.25) adjusted for confirmed daily walking. Waist-to-hip risk thresholds from WHO technical report. Nutrient depletion data from peer-reviewed literature on smoking and cannabis use. Supplement recommendations based on established evidence; NAC and high-dose supplements should be discussed with a GP before commencing if any underlying conditions exist.
+    <br><br>
+    <strong>Disclaimer:</strong> This report is a detailed personal health overview based on self-reported biometric data and established health formulas. It is not a clinical diagnosis, medical prescription, or substitute for professional medical advice. Consult a dermatologist for psoriasis management, a GP for smoking cessation support, and a registered dietitian for clinical nutritional guidance.
+  </div>
+
+</div>
+</body>
+</html>

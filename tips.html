@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Tips — 90 Day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAFAF8;--surface:#FFFFFF;--border:rgba(0,0,0,0.08);--border-strong:rgba(0,0,0,0.15);
+  --text:#111110;--text-2:#555552;--text-3:#999994;--text-4:#C8C7C2;
+  --green:#2D6A4F;--green-bg:#EBF5EF;--amber:#92400E;--amber-bg:#FEF3C7;
+  --red:#991B1B;--red-bg:#FEE2E2;--blue:#1A3A6B;--blue-bg:#EAF0FB;
+  --purple:#4A2080;--purple-bg:#F0EAFC;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-weight:300;font-size:15px;line-height:1.7;}
+.nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:0 1rem;display:flex;align-items:center;justify-content:space-between;height:52px;}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:18px;letter-spacing:-0.3px;}
+.nav-links{display:flex;gap:4px;}
+.nav-link{font-size:11px;padding:5px 9px;border-radius:8px;color:var(--text-3);text-decoration:none;}
+.nav-link.active{background:var(--text);color:white;}
+.wrap{max-width:640px;margin:0 auto;padding:1.5rem 1rem 4rem;}
+/* HEADER */
+.page-header{padding:1rem 0 1.5rem;border-bottom:1px solid var(--border);margin-bottom:1.5rem;}
+.page-title{font-family:'DM Serif Display',serif;font-size:28px;letter-spacing:-0.5px;margin-bottom:4px;}
+.page-sub{font-size:13px;color:var(--text-3);font-weight:300;}
+/* SECTION */
+.section{margin-bottom:2rem;}
+.section-label{font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-3);font-weight:500;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.25rem;margin-bottom:8px;}
+.card-green{background:var(--green-bg);border:1px solid rgba(45,106,79,0.15);border-radius:16px;padding:1.1rem 1.25rem;margin-bottom:8px;}
+.card-amber{background:var(--amber-bg);border:1px solid rgba(146,64,14,0.15);border-radius:16px;padding:1.1rem 1.25rem;margin-bottom:8px;}
+.card-red{background:var(--red-bg);border:1px solid rgba(153,27,27,0.12);border-radius:16px;padding:1.1rem 1.25rem;margin-bottom:8px;}
+.card-dark{background:var(--text);border-radius:16px;padding:1.25rem;margin-bottom:8px;color:white;}
+.card-blue{background:var(--blue-bg);border:1px solid rgba(26,58,107,0.12);border-radius:16px;padding:1.1rem 1.25rem;margin-bottom:8px;}
+.card-purple{background:var(--purple-bg);border:1px solid rgba(74,32,128,0.12);border-radius:16px;padding:1.1rem 1.25rem;margin-bottom:8px;}
+/* TIP ITEM */
+.tip{padding:11px 0;border-bottom:1px solid var(--border);}
+.tip:last-child{border-bottom:none;}
+.tip-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:4px;}
+.tip-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.tip-title{font-size:14px;font-weight:500;color:var(--text);line-height:1.4;}
+.tip-body{font-size:13px;color:var(--text-2);line-height:1.65;padding-left:26px;}
+/* SWAP TABLE */
+.swap-row{display:grid;grid-template-columns:1fr 16px 1fr;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.swap-row:last-child{border-bottom:none;}
+.swap-from{color:var(--text-2);}
+.swap-arrow{color:var(--text-3);text-align:center;font-size:12px;}
+.swap-to{color:var(--green);font-weight:500;}
+.swap-gain{font-size:11px;color:var(--text-3);margin-top:2px;}
+/* SUPP TABLE */
+.supp-row{display:grid;grid-template-columns:1fr 70px 90px;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;align-items:start;}
+.supp-row:last-child{border-bottom:none;}
+.supp-name{font-weight:500;}
+.supp-dose{color:var(--text-3);font-size:12px;}
+.supp-time{font-size:11px;color:var(--text-3);}
+/* TIMING BLOCKS */
+.time-block{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.time-block:last-child{border-bottom:none;}
+.time-badge{font-size:11px;font-weight:500;min-width:60px;padding-top:2px;color:var(--text);}
+.time-content{flex:1;}
+.time-title{font-size:13px;font-weight:500;margin-bottom:2px;}
+.time-body{font-size:12px;color:var(--text-3);line-height:1.5;}
+/* BADGE */
+.badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:100px;font-weight:500;margin-left:6px;vertical-align:middle;}
+.b-green{background:var(--green-bg);color:var(--green);}
+.b-amber{background:var(--amber-bg);color:var(--amber);}
+.b-red{background:var(--red-bg);color:var(--red);}
+.b-blue{background:var(--blue-bg);color:var(--blue);}
+/* NUTRACHECK TIPS */
+.nc-tip{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.nc-tip:last-child{border-bottom:none;}
+.nc-num{font-family:'DM Serif Display',serif;font-size:22px;color:var(--text-4);flex-shrink:0;line-height:1;margin-top:2px;}
+.nc-text{flex:1;}
+.nc-title{font-size:13px;font-weight:500;margin-bottom:2px;}
+.nc-body{font-size:12px;color:var(--text-3);line-height:1.55;}
+/* PULL */
+.pull{font-family:'DM Serif Display',serif;font-size:18px;font-style:italic;color:var(--text-2);border-left:2px solid var(--text);padding:0.5rem 0 0.5rem 1rem;margin:1rem 0;line-height:1.4;}
+::-webkit-scrollbar{width:0;}
+@media(max-width:480px){.supp-row{grid-template-columns:1fr 60px;}.supp-time{display:none;}}
+</style>
+</head>
+<body>
+<div class="nav">
+  <div class="nav-logo">90 Day</div>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Tracker</a>
+    <a class="nav-link" href="report.html">Report</a>
+    <a class="nav-link" href="recovery.html">Recovery</a>
+    <a class="nav-link active" href="tips.html">Tips</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="page-header">
+    <div class="page-title">Nutrition Tips</div>
+    <div class="page-sub">Food swaps, supplement timing, and the practical knowledge that changes results.</div>
+  </div>
+
+  <!-- ── SECTION 1: DEAD CALORIE SWAPS ── -->
+  <div class="section">
+    <div class="section-label">Dead calorie swaps — same satisfaction, way more protein</div>
+    <div class="card">
+      <p style="font-size:13px;color:var(--text-3);margin-bottom:10px;line-height:1.6">Dead calories = food that costs you kcal budget but gives back almost zero protein. These are the swaps that keep you full, hit your targets, and don't blow your macros before 5pm.</p>
+      <div class="swap-row">
+        <div><div class="swap-from">Hazelnut coffee creamer</div><div class="swap-gain">70 kcal · 0g protein · 12g sugar</div></div>
+        <div class="swap-arrow">→</div>
+        <div><div class="swap-to">Splash of full-fat milk</div><div class="swap-gain">20 kcal · 1g protein · 0g added sugar</div></div>
+      </div>
+      <div class="swap-row">
+        <div><div class="swap-from">White bread (2 slices)</div><div class="swap-gain">134 kcal · 6g protein · spikes blood sugar fast</div></div>
+        <div class="swap-arrow">→</div>
+        <div><div class="swap-to">Wholegrain or sourdough</div><div class="swap-gain">Same kcal · 8g protein · slower digestion</div></div>
+      </div>
+      <div class="swap-row">
+        <div><div class="swap-from">Vinta crackers (6 crackers)</div><div class="swap-gain">420 kcal · 6g protein · 54g carbs</div></div>
+        <div class="swap-arrow">→</div>
+        <div><div class="swap-to">Rice cakes + cottage cheese</div><div class="swap-gain">180 kcal · 18g protein · 20g carbs</div></div>
+      </div>
+      <div class="swap-row">
+        <div><div class="swap-from">Butter on bread (4 pats)</div><div class="swap-gain">144 kcal · 0.2g protein · pure saturated fat</div></div>
+        <div class="swap-arrow">→</div>
+        <div><div class="swap-to">Avocado spread or Greek yogurt</div><div class="swap-gain">80 kcal · 4g protein · healthier fat profile</div></div>
+      </div>
+      <div class="swap-row">
+        <div><div class="swap-from">Flavoured yogurt (low fat)</div><div class="swap-gain">150 kcal · 5g protein · 20g+ sugar</div></div>
+        <div class="swap-arrow">→</div>
+        <div><div class="swap-to">Full-fat Greek yogurt</div><div class="swap-gain">130 kcal · 17g protein · 5g sugar</div></div>
+      </div>
+      <div class="swap-row">
+        <div><div class="swap-from">Juice (any kind)</div><div class="swap-gain">110 kcal · 0g protein · 26g sugar · no fibre</div></div>
+        <div class="swap-arrow">→</div>
+        <div><div class="swap-to">Eat the whole fruit instead</div><div class="swap-gain">80 kcal · 1g protein · fibre intact · slower sugar release</div></div>
+      </div>
+      <div class="swap-row">
+        <div><div class="swap-from">Cereal (most brands)</div><div class="swap-gain">200 kcal · 4g protein · 30g+ sugar</div></div>
+        <div class="swap-arrow">→</div>
+        <div><div class="swap-to">Oats (plain, not instant)</div><div class="swap-gain">200 kcal · 6g protein · 3g sugar · 4g fibre</div></div>
+      </div>
+      <div class="swap-row">
+        <div><div class="swap-from">Protein bar (most)</div><div class="swap-gain">250 kcal · 20g protein · 20g+ sugar · expensive</div></div>
+        <div class="swap-arrow">→</div>
+        <div><div class="swap-to">2 boiled eggs + banana</div><div class="swap-gain">200 kcal · 14g protein · real food · cheaper</div></div>
+      </div>
+      <div class="swap-row">
+        <div><div class="swap-from">Peanut butter (4 tbsp)</div><div class="swap-gain">380 kcal · 16g protein · 32g fat</div></div>
+        <div class="swap-arrow">→</div>
+        <div><div class="swap-to">1 tbsp peanut butter + cottage cheese</div><div class="swap-gain">220 kcal · 22g protein · better ratio</div></div>
+      </div>
+      <div class="swap-row">
+        <div><div class="swap-from">Chips / crisps (snack)</div><div class="swap-gain">150 kcal · 2g protein · 15g fat · 0 satiety</div></div>
+        <div class="swap-arrow">→</div>
+        <div><div class="swap-to">Mixed nuts (30g)</div><div class="swap-gain">180 kcal · 5g protein · healthy fats · actually filling</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: PROTEIN DENSITY ── -->
+  <div class="section">
+    <div class="section-label">Protein density — most protein per calorie</div>
+    <div class="card">
+      <p style="font-size:13px;color:var(--text-3);margin-bottom:12px;line-height:1.6">Ranked by protein per 100 kcal. When you are struggling to hit 140g without blowing your calorie budget, go to the top of this list.</p>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">🥇</span><span class="tip-title">Egg whites — 26g protein per 100 kcal</span></div>
+        <div class="tip-body">Cheapest, most bioavailable protein source available. Add 2 egg whites to your whole eggs every morning. Adds 14g protein for 60 kcal.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">🥈</span><span class="tip-title">Cottage cheese — 14g protein per 100 kcal</span></div>
+        <div class="tip-body">Casein protein — slow digesting, keeps you full for 4–5 hours. The best late-night snack. 180g = 20g protein, 150 kcal. Always keep this stocked.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">🥉</span><span class="tip-title">Chicken breast — 22g protein per 100 kcal</span></div>
+        <div class="tip-body">180g cooked = 40g protein, 185 kcal. The most efficient lean protein for your budget per macro. Batch cook 3–4 breasts at once.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">4</span><span class="tip-title">Tuna in water — 24g protein per 100 kcal</span></div>
+        <div class="tip-body">1 tin = 25g protein, 100 kcal, essentially zero fat. Fastest protein fix when you have no time to cook. Keep 6 tins in the cupboard at all times.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">5</span><span class="tip-title">Greek yogurt (full fat) — 11g protein per 100 kcal</span></div>
+        <div class="tip-body">150g = 17g protein, 140 kcal. More filling than low-fat because the fat slows gastric emptying. Full fat beats low fat for satiety every time.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">6</span><span class="tip-title">Salmon — 14g protein per 100 kcal</span></div>
+        <div class="tip-body">Higher calorie than chicken but brings omega-3 EPA/DHA that nothing else gives you. 3x per week is enough to cover your omega-3 needs. Do not skip it for the cheaper option every time.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3: NUTRACHECK HACKS ── -->
+  <div class="section">
+    <div class="section-label">Nutracheck — how to use it properly</div>
+    <div class="card">
+      <div class="nc-tip">
+        <div class="nc-num">01</div>
+        <div class="nc-text">
+          <div class="nc-title">Save meals as templates</div>
+          <div class="nc-body">Go to My Meals → Create Meal. Build your standard Meal 1 (eggs + oats + Greek yogurt) once. Save it. Every morning tap it and log the whole thing in one tap. Same for Meal 2. This removes the ADHD friction of re-logging every day from scratch.</div>
+        </div>
+      </div>
+      <div class="nc-tip">
+        <div class="nc-num">02</div>
+        <div class="nc-text">
+          <div class="nc-title">Watch the protein number first — nothing else</div>
+          <div class="nc-body">Open the app. Look at PROTg remaining. That is your only job. If it is above 100g remaining at 6pm you need to take action immediately. Calories sort themselves out when protein is hit — you cannot eat 140g protein without also consuming enough calories.</div>
+        </div>
+      </div>
+      <div class="nc-tip">
+        <div class="nc-num">03</div>
+        <div class="nc-text">
+          <div class="nc-title">Log before you eat, not after</div>
+          <div class="nc-body">Logging after means you have already eaten something you cannot undo. Log what you are about to eat, check the macros, then eat. Takes 30 seconds and prevents the problem entirely.</div>
+        </div>
+      </div>
+      <div class="nc-tip">
+        <div class="nc-num">04</div>
+        <div class="nc-text">
+          <div class="nc-title">Barcode scanner for everything packaged</div>
+          <div class="nc-body">Do not manually search packaged food. Tap the barcode icon, scan it, done. Nutracheck UK database is very accurate. For loose food (eggs, chicken, oats) use the search and select the most basic version — no sauces or preparation methods added.</div>
+        </div>
+      </div>
+      <div class="nc-tip">
+        <div class="nc-num">05</div>
+        <div class="nc-text">
+          <div class="nc-title">The 1,800 floor — never go below this</div>
+          <div class="nc-body">If your FOOD number drops below 1,800 kcal at any point during the day, you need to eat more. Going under consistently will suppress your metabolism and cost you muscle. Use the remaining kcal display at the bottom — if it shows more than 400 left at 8pm, add a proper meal, not a snack.</div>
+        </div>
+      </div>
+      <div class="nc-tip">
+        <div class="nc-num">06</div>
+        <div class="nc-text">
+          <div class="nc-title">Consistent device — pick one and stick to it</div>
+          <div class="nc-body">Nutracheck does sync across devices if you are logged into the same account — unlike the 90-day tracker which is device-local. Make sure you are signed in on both iPad and laptop with the same Nutracheck account and it will sync automatically.</div>
+        </div>
+      </div>
+      <div class="nc-tip">
+        <div class="nc-num">07</div>
+        <div class="nc-text">
+          <div class="nc-title">Use the Week View to spot patterns</div>
+          <div class="nc-body">Tap Week View at the top of the diary. This shows your average protein and calories across 7 days. More useful than any single day. If your weekly average protein is above 130g, you are on track even if individual days are inconsistent.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: SUPPLEMENT TIMING ── -->
+  <div class="section">
+    <div class="section-label">Supplement timing — when each one works best</div>
+
+    <div class="pull">Taking the right supplement at the wrong time reduces its effectiveness by 20–60%. Timing is not optional.</div>
+
+    <div class="card-dark" style="margin-bottom:8px">
+      <p style="font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:12px">With Meal 1 — morning</p>
+      <div class="supp-row" style="border-color:rgba(255,255,255,0.1)">
+        <span style="font-weight:500">Vitamin C 500mg</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px">500mg</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.35)">Fat-soluble — needs food</span>
+      </div>
+      <div class="supp-row" style="border-color:rgba(255,255,255,0.1)">
+        <span style="font-weight:500">Zinc bisglycinate</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px">15–25mg</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.35)">Must be with food — nausea if empty</span>
+      </div>
+      <div class="supp-row" style="border-color:rgba(255,255,255,0.1)">
+        <span style="font-weight:500">B-Complex</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px">Standard</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.35)">Morning — energising, avoid at night</span>
+      </div>
+      <div class="supp-row" style="border-color:rgba(255,255,255,0.1)">
+        <span style="font-weight:500">NAC 600mg</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px">600mg</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.35)">First dose AM — lung antioxidant</span>
+      </div>
+      <div class="supp-row" style="border-bottom:none">
+        <span style="font-weight:500">Creatine monohydrate</span>
+        <span style="color:rgba(255,255,255,0.4);font-size:12px">5g</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.35)">Any time — consistency matters most</span>
+      </div>
+    </div>
+
+    <div class="card-green" style="margin-bottom:8px">
+      <p style="font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:12px">With a fatty meal — Meal 2</p>
+      <div class="supp-row">
+        <span style="font-weight:500">Vitamin D3 + K2</span>
+        <span style="color:var(--text-3);font-size:12px">3,000 IU + 100mcg</span>
+        <span style="font-size:11px;color:var(--text-3)">Fat-soluble — needs dietary fat to absorb</span>
+      </div>
+      <div class="supp-row">
+        <span style="font-weight:500">Omega-3 fish oil</span>
+        <span style="color:var(--text-3);font-size:12px">2–3g EPA+DHA</span>
+        <span style="font-size:11px;color:var(--text-3)">With fatty food — reduces fishy aftertaste and improves absorption by 50%</span>
+      </div>
+      <div class="supp-row" style="border-bottom:none">
+        <span style="font-weight:500">NAC 600mg (second dose)</span>
+        <span style="color:var(--text-3);font-size:12px">600mg</span>
+        <span style="font-size:11px;color:var(--text-3)">Second dose PM — maintains glutathione levels</span>
+      </div>
+    </div>
+
+    <div class="card-blue">
+      <p style="font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:12px">45 minutes before sleep</p>
+      <div class="supp-row">
+        <span style="font-weight:500">Magnesium glycinate</span>
+        <span style="color:var(--text-3);font-size:12px">300–400mg</span>
+        <span style="font-size:11px;color:var(--text-3)">Deepens slow-wave sleep. Do not take in the morning — it will make you drowsy</span>
+      </div>
+      <div class="supp-row" style="border-bottom:none">
+        <span style="font-weight:500">Casein / cottage cheese</span>
+        <span style="color:var(--text-3);font-size:12px">180g / 20g P</span>
+        <span style="font-size:11px;color:var(--text-3)">Slow-digesting protein feeds muscle repair for 6–8hrs through sleep</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 5: STACKING RULES ── -->
+  <div class="section">
+    <div class="section-label">Supplement stacking — what to combine and what to separate</div>
+    <div class="card">
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">✓</span><span class="tip-title">Vitamin C + Zinc — always together <span class="badge b-green">Stack</span></span></div>
+        <div class="tip-body">Vitamin C significantly increases zinc absorption and vice versa. Take them at the same time with Meal 1. This pairing also accelerates wound healing, skin repair, and immune function simultaneously.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">✓</span><span class="tip-title">Vitamin D3 + K2 — always together <span class="badge b-green">Stack</span></span></div>
+        <div class="tip-body">D3 increases calcium absorption. K2 directs that calcium to bones and away from arteries. Taking D3 without K2 long-term risks arterial calcification. They are sold combined — buy the combo version.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">✓</span><span class="tip-title">Omega-3 + Vitamin D3 — good stack <span class="badge b-green">Stack</span></span></div>
+        <div class="tip-body">Both fat-soluble, both taken with a fatty meal. The fat from your meal aids absorption of both simultaneously. Omega-3 also increases D3 receptor sensitivity in muscle tissue.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">✓</span><span class="tip-title">Magnesium + Casein before sleep — optimal recovery stack <span class="badge b-green">Stack</span></span></div>
+        <div class="tip-body">Magnesium deepens slow-wave sleep. Casein provides a steady amino acid drip for 6–8 hours. Combined, they maximise the growth hormone pulse that fires in deep sleep. This is the most important recovery combination in the entire stack.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">✗</span><span class="tip-title">Zinc + Calcium — separate by 2 hours <span class="badge b-red">Separate</span></span></div>
+        <div class="tip-body">Calcium and zinc compete for the same intestinal absorption transporter. Taking them together reduces zinc absorption by up to 50%. Take zinc with Meal 1 and calcium (if supplementing) with Meal 2.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">✗</span><span class="tip-title">Iron + Calcium — never together <span class="badge b-red">Separate</span></span></div>
+        <div class="tip-body">Calcium is the most powerful inhibitor of iron absorption. If taking iron (especially relevant for the female profile), take it on an empty stomach with Vitamin C only. No dairy within 2 hours.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">✗</span><span class="tip-title">B-Complex at night <span class="badge b-red">Avoid</span></span></div>
+        <div class="tip-body">B vitamins — particularly B6 and B12 — are energising. Taking them at night causes difficulty sleeping and vivid dreams in many people. Morning only, always with food.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">✗</span><span class="tip-title">Creatine + caffeine — not a concern <span class="badge b-green">Fine together</span></span></div>
+        <div class="tip-body">Old research suggested caffeine blocked creatine uptake. This has been disproven. Your morning creatine with coffee is completely fine. Take creatine whenever it fits into your routine — consistency of daily intake matters far more than timing.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 6: QUICK WINS ── -->
+  <div class="section">
+    <div class="section-label">Quick wins — small changes, immediate impact</div>
+    <div class="card-amber">
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">⚡</span><span class="tip-title">The 30g protein breakfast rule</span></div>
+        <div class="tip-body">Getting 30g+ protein at Meal 1 sets your hunger hormones (ghrelin and leptin) for the rest of the day. You will naturally eat less junk in the afternoon. Skipping protein at breakfast is the single fastest way to be 80g behind on protein by 6pm.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">⚡</span><span class="tip-title">Add egg whites to everything</span></div>
+        <div class="tip-body">2 egg whites = 7g protein, 30 kcal, no taste, no fat. Add them to scrambled eggs, oats, smoothies. The cheapest and most invisible protein boost available.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">⚡</span><span class="tip-title">Greek yogurt replaces sour cream, mayo, and dips</span></div>
+        <div class="tip-body">Use full-fat Greek yogurt as a dip, sauce base, or topping instead of sour cream or mayo. Saves 100–200 kcal and adds 10–15g protein. Works with everything savoury.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">⚡</span><span class="tip-title">Drink water before you think you are hungry</span></div>
+        <div class="tip-body">Dehydration mimics hunger. Before reaching for a snack between meals, drink 400ml water and wait 10 minutes. If still hungry, eat. This eliminates a significant portion of unplanned snacking — relevant for both the THC appetite spike and ADHD impulsive eating.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">⚡</span><span class="tip-title">Batch cook once a week</span></div>
+        <div class="tip-body">Cook 4 chicken breasts, a large pot of rice, and roast a tray of vegetables on the same day. Refrigerate. For the next 4 days Meal 2 takes 2 minutes to assemble. This is the single most powerful habit for consistent protein intake.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">⚡</span><span class="tip-title">Turmeric + black pepper — always together</span></div>
+        <div class="tip-body">Curcumin (active compound in turmeric) has less than 1% bioavailability alone. Piperine in black pepper increases its absorption by 2,000%. Always add a pinch of black pepper when using turmeric. It changes nothing about the flavour.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">⚡</span><span class="tip-title">The 10pm rule — nothing after this</span></div>
+        <div class="tip-body">Insulin sensitivity drops 30–50% after 10pm. Carbs eaten after this are preferentially stored as fat, not used as energy or glycogen. This is the mechanism behind the late-night eating body fat pattern. Cottage cheese is the one exception — it is protein-only and slow-digesting.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 7: PSORIASIS FOOD NOTES ── -->
+  <div class="section">
+    <div class="section-label">Psoriasis — food that directly affects flares</div>
+    <div class="card">
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">🔥</span><span class="tip-title">Foods that trigger or worsen flares</span></div>
+        <div class="tip-body">Red meat more than 2x per week (arachidonic acid — pro-inflammatory). Processed seed oils (sunflower, vegetable, canola — high omega-6 that competes with omega-3). Refined sugar and white flour. Alcohol. Nightshades (tomatoes, peppers, aubergine) in some individuals — track if flares correlate.</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">🧊</span><span class="tip-title">Foods that reduce flare frequency</span></div>
+        <div class="tip-body">Salmon and mackerel (EPA/DHA reduces IL-17 and TNF-α directly). Olive oil daily (oleocanthal has anti-inflammatory effect comparable to low-dose ibuprofen). Broccoli (sulforaphane activates Nrf2 cellular defence pathway). Turmeric with pepper. Berries (anthocyanins reduce systemic oxidative stress).</div>
+      </div>
+      <div class="tip">
+        <div class="tip-head"><span class="tip-icon">☀️</span><span class="tip-title">Tbilisi sun — use it as medicine</span></div>
+        <div class="tip-body">15–20 minutes of direct midday sun on psoriasis patches is clinically equivalent to mild UVB phototherapy. April through September in Tbilisi gives you this for free. Build from 10 minutes. Never burn — sunburn triggers a Koebner response (new plaques at trauma sites).</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:11px;color:var(--text-4);line-height:1.75;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+    Tips are based on established nutritional science and practical application to your specific health profile. Not medical advice. Update this page regularly as you learn what works for your body.
+  </div>
+</div>
+</body>
+</html>
